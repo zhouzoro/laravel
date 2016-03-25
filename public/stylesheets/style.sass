@@ -1,0 +1,442 @@
+@charset "utf-8"
+
+$font-stack: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, “Microsoft YaHei”, “微软雅黑”, SimSun, “宋体”, Heiti, “黑体”, sans-serif
+$prim-color: #C90
+$header-height: 96px
+$html-bg: #F4F2F0
+$bg-color:#73216D
+$carousel-height: 624px
+$carousel-height-min: 248px
+$nav-height: 96px
+$bg-dark: #2C3E50
+$bg: #3FBAC2
+$bg-blur: rgba(255, 255, 255,0.9)
+$light-border: 1px solid lightgray
+html,body,h1, h2, h3, h4, h5,a,button,label,.button
+	font-family: $font-stack
+
+div
+	//border: 1px solid black
+
+.container-fluid
+	padding: 0px
+.no-boundry
+	padding: 0px
+.border-left
+	border-left: $light-border 
+#nav
+	//position: absolute
+	top: 0px
+	padding: 0px 24px
+	opacity: 0.8
+	min-height: $nav-height
+	width: 100%
+	z-index: 2
+	background: $bg-blur
+	//box-shadow: inset 0px -64px 64px -64px $bg-blur
+	color: white
+	div
+		display: inline-block
+		color: white
+	.logo
+		position: relative
+		top: 0px
+		padding-top: 0px
+		font-size: 54px
+		padding-right: 50px
+		font-family: "Matura MT Script Capitals", "Algerian"
+		img
+			top: 0px
+			padding-top: 0px
+			height: $nav-height
+	.menu
+		position: relative
+		bottom: -20px
+		vertical-align: baseline
+		color: white
+		a.item
+			color: black
+			display: inline-block
+			margin: 0px 4px 0px 4px
+			padding: 12px 16px 16px 16px
+			font-size: 24px
+		a.item:hover
+			color: white
+			background: $bg
+	.login-container
+		padding: 28px 24px 12px 24px
+		.out-links
+			padding: 8px 12px 12px 12px
+		a.out-link
+			color: $bg
+			border: 1px solid
+			//background: $bg
+			padding: 8px
+			margin: 4px
+			border-radius: calc(50% + 8px)
+			i
+				color: $bg
+		float: right
+		.ui.button
+			margin-right: 12px
+	.search.ui.input.action
+		background: transparent
+		padding: 12px
+		input,select,.ui.button
+			background: transparent
+		select.ui.compact.selection.dropdown
+			padding: 4px 8px
+.card-split
+	background: white
+	margin: 24px 2px 24px 2px
+#nav:hover
+	opacity: 1
+#search-home
+	position: absolute
+	width: 100%
+	top: 424px
+	height: 100px
+	//padding: 0px 329px 0px 329px
+	text-align: center
+	.search-container
+		margin: 4px
+		padding: 12px 24px 12px 24px
+		border-radius: 5px
+		background: rgba(26,26,26,0.6)
+		//border: 1px solid lightgray
+		box-shadow: 0px 0px 12px -6px rgba(199,199,199,0.8)
+		//background: $bg-blur
+		.selections.ui.form
+			.inline.fields
+				.field
+					display: inline-block
+					.ui.radio.checkbox
+						label
+							color: white
+		.search-bar
+			.ui.input.tansparent
+				width: 100%
+				input
+					width: 100%
+				i
+					cursor: pointer
+#carousel-home
+	z-index: 1
+	position: relative
+	margin-bottom: 16px
+	height: $carousel-height
+	width: 100%
+	overflow: hidden
+	.carousel-fade
+		.carousel-inner
+			.item
+				transition-property: opacity
+				transition-duration: 1.5s
+				img
+					width: 100%
+					height: $carousel-height
+					object-fit: cover
+				.carousel-caption
+					width: 100%
+					//left: 128px
+					position: absolute
+					top: 24px
+					text-align: left
+			.item,
+			.active.left,
+			.active.right
+				opacity: 0
+				transition-timing-function: ease-in-out
+			.active,
+			.next.left,
+			.prev.right
+				opacity: 1
+			.next,
+			.prev,
+			.active.left,
+			.active.right
+				left: 0
+				transform: translate3d(0, 0, 0)
+	#carousel-thumbnail
+		position: absolute
+		right: 0px
+		top: -4px
+		width: 256px
+		padding-top: 28px
+		padding-bottom: 128px
+		margin-right: 48px
+		overflow: hidden
+		background: rgba(44,44,44,0.6)
+		border: 1px solid lightgray
+		.thumbnail
+			width: 100%
+			height: 128px
+			padding: 0px
+			border: none
+			box-shadow: 0px 0px 24px -12px rgba(44,44,44,0.6)
+			background: $bg
+			cursor: pointer
+			//transition: all 0.4s ease-out
+			img
+				width: 100%
+				height: 100%
+				object-fit: cover
+		.active.thumbnail
+			padding: 2px
+		.thumbnail:hover
+			padding: 2px
+#content-side
+	padding: 0px
+	.side-poster
+		height: 324px
+		width: 100%
+#report
+	height: 289px
+	border: $light-border
+	.report-compo
+		padding: 8px
+		.item
+			padding: 2px
+			border-bottom: $light-border
+			height: 108px
+			img
+				display: inline-block
+				width: 30%
+				height: 84px
+			.title
+				margin-left: 5%
+				width: 60%
+				display: inline-block
+
+	.report-poster
+		height: 289px
+		overflow: hidden
+		padding-bottom: 8px
+		div:first-child
+			padding: 0px
+		.poster-img
+			display: inline-block
+			position: relative
+			top: 4px
+			padding: 12px 0px 4px 0px
+			width: 100%
+			overflow: hidden
+			img
+				width: 100%
+				height: 248px
+				object-fit: cover
+		.intro
+			padding-left: 5%
+			width: 100%
+			display: inline-block
+			position: relative
+			top: 4px
+
+#articles-container
+	padding-left: 6px
+	margin-left: 8px
+	margin-top: 8px
+	border-left: $light-border
+	#articles-menu
+		padding: 8px 0px 4px 0px
+		border-bottom: $light-border
+		height: 54px
+		a.item
+			font-size: 16px
+			display: inline-block
+			padding: 12px 16px 8px 12px
+			color: black
+		.new-article
+			float: right
+			font-size: 16px
+			padding-top: 4px
+.article-cover
+	width: 100%
+	height: 256px
+	overflow: hidden
+	img
+		width: 100%
+		height: 100%
+#articles-list
+	.article-preview
+		width: 100%
+		margin: 8px 0px 0px 4px
+		padding: 4px 0px 24px 0px
+		border-bottom: 1px solid lightgray
+		.article-author
+			a,label
+				position: relative
+				bottom: 8px
+			.user-pic
+				display: inline-block
+				border-radius: 32px
+				overflow: hidden
+				i
+					font-size: 32px
+					position: absolute
+					left: 24px
+		
+		.article-description
+			p
+				font-style: italic
+		.article-meta
+			div
+				display: inline-block
+			a
+				padding: 2px 16px 8px 2px
+				i
+					padding: 2px
+	.article-preview.style1
+	.article-preview.style2
+		.cover-contaner
+			padding: 0px
+			.article-cover
+				height: 196px
+		//.txt-container
+			padding: 24px 12px
+
+.cursor-pointer
+	cursor: pointer
+footer
+	background: $bg-dark
+	min-height: 128px
+	text-align: center
+	color: silver
+	div
+		padding-top: 24px
+		text-align: center
+	a
+		color: silver
+		padding: 2px 8px
+	a:hover
+		color: silver
+		border-bottom: 1px solid
+	a.share-link
+		font-size: 24px
+
+#news.side-poster
+	ul
+		li
+			padding: 4px 2px
+			a:hover
+				border-bottom: 1px solid
+img.user-pic.circle
+	width: 64px
+	height: 64px
+	border-radius: 50%
+	object-fit: cover
+img.user-pic.small.circle
+	width: 32px
+	height: 32px
+.news-style
+	height: 289px
+	padding: 0px 1px
+	overflow: hidden
+	img.background.image
+		width: 100%
+		height: 289px
+		transition: all 0.4s ease-out
+		object-fit: cover
+		border: 2px solid #32ACB7
+	.content
+		color: white
+		background: rgba(0,0,0,0.2)
+		position: relative
+		top: -289px
+		width: 100%
+		padding: 24px
+		padding-top: 200px
+		height: 289px
+		overflow: hidden
+		transition: all 0.3s ease-out
+		div
+			transition: all 0.4s ease-out
+		.header
+			display: inline-block
+			font-size: 18px
+			height: 54px
+			overflow: hidden
+		.meta
+			font-size: 12px
+			margin-bottom: 36px
+		.description
+			font-size: 12px
+			height: 88px
+			margin-bottom: 24px
+			overflow: hidden
+
+.news-style:hover .background.image
+	border: 8px solid #32ACB7
+.news-style:hover .content
+	padding-top: 64px
+	background: rgba(0,0,0,0.4)
+.news-style:hover .meta
+	margin-bottom: 12px
+.news-style:hover .description
+	margin-bottom: 4px
+
+.arrow
+	padding: 4px
+	height: 24px
+	background: rgba(0,0,0,0.5)
+	opacity: 0.6
+	cursor: pointer
+	div
+		display: inline-block
+	.stick
+		width: 28px
+		height: 1px
+		position: relative
+		top: -5px
+		background: white
+	.point
+		width: 12px
+		height: 12px
+		margin-top: 6px
+		position: relative
+		left: -12px
+		border-top: 1px solid white
+		border-left: 1px solid white
+		transform: rotate(135deg)
+	.wall
+		color: white
+		font-size: 10px
+		width: 2px
+		height: 17px
+		position: relative
+		left: -8px
+		top: 3px
+		border-left: 1px solid white
+.arrow:hover
+	opacity: 1
+
+@media(max-width:768px)
+	#search-home
+		//padding: 0px 124px 0px 124px
+	#carousel-thumbnail
+		display: none
+	#nav
+		.menu
+			a.item
+				padding: 12px 12px 12px 12px
+
+@media(max-width:480px)
+	#search-home
+		//padding: 0px 12px 0px 12px
+	.login-container
+		text-align: center
+	#carousel-home
+		height: $carousel-height-min
+		.carousel-fade
+			.carousel-inner
+				.item
+					img
+						height: $carousel-height-min
+				.carousel-caption
+					h2 
+						font-size: 20px
+	.article-cover
+		height: 189px
+	#nav
+		.menu
+			display: none
