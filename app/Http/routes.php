@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', function () {
+    return 'hello its me';
+});
+Route::get('/myAccount','UserController@me');
+Route::resource('cruiser_report','CruiserReportController');
+
+Route::controller('user','UserController');
