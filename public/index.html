@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>漫行邮轮</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--meta(name='renderer' content='webkit')-->
+    <!--meta(http-equiv="X-UA-Compatible" content="IE=10")-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="/semantic/semantic.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.min.css">
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+</head>
+
+<body>
+    <div class="pusher"></div>
+    <header>
+        <div id="nav">
+            <div class="logo"><img src="/images/logo.normal.jpg"></div>
+            <!--.search.ui.input.actioninput(type='text' placeholder='Search for...')
+select.ui.compact.selection.dropdown
+	option(value='all') 全部
+	option(value='ship') 邮轮
+	option(value='logue') 游记
+	option(value='guide') 攻略
+.ui.button(type='submit') Search-->
+            <div class="menu"><a class="item">首页</a><a class="item">游记</a><a class="item">攻略</a><a class="item">目的地</a><a class="item">体验员</a><a class="item">社区</a></div>
+            <div class="login-container">
+                <div class="out-links"><a class="out-link"><i class="fa fa-qq"></i></a><a class="out-link"><i class="fa fa-weixin"></i></a><a class="out-link"><i class="fa fa-weibo"></i></a></div>
+                <div class="direct-ops">
+                    <div class="ui button login green basic">登录</div>
+                    <div class="ui button signup blue basic">注册</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="carousel-home">
+        <div id="carousel-slide" data-ride="carousel" data-pause="false" class="carousel slide carousel-fade">
+            <div role="listbox" class="carousel-inner">
+                <div class="item active"><img src="https://placem.at/places?w=1400&amp;random=1" alt="slider image" class="slr-img cursor-pointer">
+                    <div class="carousel-caption">
+                        <h2 href="">全国首家邮轮分享与点评平台</h2>
+                        <label class="slabelextra">
+                            <label class="slabeldate">2016</label>
+                            <label class="slabelsource">漫行邮轮</label>
+                        </label>
+                    </div>
+                </div>
+                <div class="item"><img src="https://placem.at/places?w=1400&amp;random=2" alt="slider image" class="slr-img cursor-pointer">
+                    <div class="carousel-caption">
+                        <h2 href="">全国首家邮轮分享与点评平台</h2>
+                        <label class="slabelextra">
+                            <label class="slabeldate">2016</label>
+                            <label class="slabelsource">漫行邮轮</label>
+                        </label>
+                    </div>
+                </div>
+                <div class="item"><img src="https://placem.at/places?w=1400&amp;random=3" alt="slider image" class="slr-img cursor-pointer">
+                    <div class="carousel-caption">
+                        <h2 href="">全国首家邮轮分享与点评平台</h2>
+                        <label class="slabelextra">
+                            <label class="slabeldate">2016</label>
+                            <label class="slabelsource">漫行邮轮</label>
+                        </label>
+                    </div>
+                </div>
+                <div class="item"><img src="https://placem.at/places?w=1400&amp;random=4" alt="slider image" class="slr-img cursor-pointer">
+                    <div class="carousel-caption">
+                        <h2 href="">全国首家邮轮分享与点评平台</h2>
+                        <label class="slabelextra">
+                            <label class="slabeldate">2016</label>
+                            <label class="slabelsource">漫行邮轮</label>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="carousel-thumbnail">
+            <div data-target="#carousel-slide" data-slide-to='0' class="active thumbnail"><img src="https://placem.at/places?w=1400&amp;random=1"></div>
+            <div data-target="#carousel-slide" data-slide-to='1' class="thumbnail"><img src="https://placem.at/places?w=1400&amp;random=2"></div>
+            <div data-target="#carousel-slide" data-slide-to='2' class="thumbnail"><img src="https://placem.at/places?w=1400&amp;random=3"></div>
+            <div data-target="#carousel-slide" data-slide-to='3' class="thumbnail"><img src="https://placem.at/places?w=1400&amp;random=4"></div>
+        </div>
+        <div id="search-home">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+                <div class="search-container">
+                    <div class="selections ui form">
+                        <div class="inline fields">
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="search-category" checked="checked">
+                                    <label>全部</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="search-category">
+                                    <label>邮轮</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="search-category">
+                                    <label>游记</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="search-category">
+                                    <label>攻略</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-bar">
+                        <div class="ui input tansparent icon">
+                            <input type="text" placeholder="Search for..."><i class="search icon"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="body-content" class="container-fluid no-boundry">
+        <div class="container-fluid no-boundry">
+            <div class="no-boundry col-xs-12 col-sm-6 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                <div id="report">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div class="report-compo report-poster">
+                            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                <div class="poster-img"><img src="https://placem.at/places?h=400&amp;random=0.5049997000023723"></div>
+                            </div>
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                <div class="intro">
+                                    <h2>体验报告标题</h2>
+                                    <p>体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div class="report-compo report-intro border-left">
+                            <h2>体验报告</h2>
+                            <div class="item"><img src="https://placem.at/places?h=100&amp;random=0.07476111454889178">
+                                <div class="title"><a href="">体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告</a></div>
+                            </div>
+                            <div class="item"><img src="https://placem.at/places?h=100&amp;random=0.9320588656701148">
+                                <div class="title"><a href="">体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告体验报告</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid no-boundry">
+            <div class="no-boundry col-xs-12 col-sm-6 col-md-5 col-md-offset-1 col-lg-4 col-lg-offset-2">
+                <div id="poster" class="card-split side-poster news-style"><img src="https://placem.at/people?w=900&amp;random=0.9291681405156851" class="background image">
+                    <div class="content">
+                        <div class="header">中国大学生邮轮体验员</div>
+                        <!--.metaspan.date= nw.date-->
+                        <!--.description= nw.quote-->
+                        <a href="" class="arrow">
+                            <div class="stick"></div>
+                            <div class="point"></div>
+                            <div class="wall"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="no-boundry col-xs-12 col-sm-6 col-md-5 col-lg-4">
+                <div id="review-report" class="card-split side-poster news-style"><img src="https://placem.at/places?h=400&amp;random=0.8929881765507162" class="background image">
+                    <div class="content">
+                        <div class="header">体验报告</div>
+                        <!--.metaspan.date= nw.date-->
+                        <!--.description= nw.quote-->
+                        <a href="" class="arrow">
+                            <div class="stick"></div>
+                            <div class="point"></div>
+                            <div class="wall"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid no-boundry">
+            <div class="no-boundry col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                <div id="content-side" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                    <div id="strategy" class="card-split side-poster">
+                        <h3 class="side-sub-title">邮轮攻略</h3>
+                        <div class="article-cover"><img src="https://placem.at/places?w=400&amp;random=0.5922332443296909"></div>
+                    </div>
+                    <div id="community" class="card-split side-poster">
+                        <h3 class="side-sub-title">社区</h3>
+                        <div class="article-cover"><img src="https://placem.at/places?w=400&amp;random=0.04657397582195699"></div>
+                    </div>
+                    <div id="news" class="card-split side-poster">
+                        <h3 class="side-sub-title">邮轮资讯</h3>
+                        <ul>
+                            <li><a href="">邮轮资讯邮轮资讯邮轮资讯邮轮资讯邮轮资讯邮轮资讯</a></li>
+                            <li><a href="">邮轮资讯邮轮资讯邮轮资讯邮轮资讯邮轮资讯邮轮资讯</a></li>
+                            <li><a href="">邮轮资讯邮轮资讯邮轮资讯邮轮资讯邮轮资讯邮轮资讯</a></li>
+                            <li><a href="">邮轮资讯邮轮资讯邮轮资讯邮轮资讯邮轮资讯邮轮资讯</a></li>
+                        </ul>
+                    </div>
+                    <div id="whales" class="card-split side-poster">
+                        <h3 class="side-sub-title">邮轮公司</h3>
+                        <div class="article-cover"><img src="https://placem.at/places?w=400&amp;random=0.8168768787290901"></div>
+                    </div>
+                    <div id="datas" class="card-split side-poster">
+                        <h3 class="side-sub-title">行业数据</h3>
+                        <ul>
+                            <li><a href="">行业数据行业数据行业数据行业数据行业数据行业数据</a></li>
+                            <li><a href="">行业数据行业数据行业数据行业数据行业数据行业数据</a></li>
+                            <li><a href="">行业数据行业数据行业数据行业数据行业数据行业数据</a></li>
+                            <li><a href="">行业数据行业数据行业数据行业数据行业数据行业数据</a></li>
+                        </ul>
+                    </div>
+                    <div id="secretary" class="card-split side-poster">
+                        <h3 class="side-sub-title">邮轮小秘书</h3>
+                        <div class="article-cover"><img src="https://placem.at/places?w=400&amp;random=0.0709780736360699"></div>
+                    </div>
+                </div>
+                <div id="content-main" class="no-boundry col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                    <div id="articles-container">
+                        <div id="articles-menu"><a class="item">热门游记</a><a class="item">最新发表</a><a class="item">更多</a>
+                            <div class="new-article">
+                                <div class="ui button blue basic"><i class="edit icon"></i><span>写游记</span></div>
+                            </div>
+                        </div>
+                        <div id="articles-list">
+                            <div class="article-preview style1">
+                                <div class="article-author">
+                                    <div class="user-pic"><img src="" class="user-pic small circle"><i class="fa fa-user"></i></div><a>user 001</a>
+                                    <label> from: </label><a class="article-cruiser">ship 001</a></div>
+                                <div class="article-title">
+                                    <h2>Nothing like this</h2></div>
+                                <div class="article-cover"><img src="https://placem.at/places?w=900&amp;random=0.7891012062318623"></div>
+                                <!--.article-tagsa.tag tag1
+a.tag tag2
+a.tag tag3-->
+                                <div class="article-description">
+                                    <p>.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description</p>
+                                </div>
+                                <div class="article-meta">
+                                    <div class="article-status"><a class="read"><i class="fa fa-eye"></i><span class="count">146</span></a><a class="like"><i class="fa fa-heart-o"></i><span class="count">171</span></a><a class="comment"><i class="fa fa-comment-o"></i><span class="count">212</span></a></div>
+                                    <div class="article-tags"><a class="tag">tag1</a><a class="tag">tag2</a><a class="tag">tag3</a></div>
+                                </div>
+                            </div>
+                            <div class="article-preview style1">
+                                <div class="article-author">
+                                    <div class="user-pic"><img src="" class="user-pic small circle"><i class="fa fa-user"></i></div><a>user 002</a>
+                                    <label> from: </label><a class="article-cruiser">ship 002</a></div>
+                                <div class="article-title">
+                                    <h2>Nothing like this</h2></div>
+                                <div class="article-cover"><img src="https://placem.at/places?w=900&amp;random=0.5600118858274072"></div>
+                                <!--.article-tagsa.tag tag1
+a.tag tag2
+a.tag tag3-->
+                                <div class="article-description">
+                                    <p>.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description</p>
+                                </div>
+                                <div class="article-meta">
+                                    <div class="article-status"><a class="read"><i class="fa fa-eye"></i><span class="count">360</span></a><a class="like"><i class="fa fa-heart-o"></i><span class="count">234</span></a><a class="comment"><i class="fa fa-comment-o"></i><span class="count">62</span></a></div>
+                                    <div class="article-tags"><a class="tag">tag1</a><a class="tag">tag2</a><a class="tag">tag3</a></div>
+                                </div>
+                            </div>
+                            <div class="article-preview style1">
+                                <div class="article-author">
+                                    <div class="user-pic"><img src="" class="user-pic small circle"><i class="fa fa-user"></i></div><a>user 003</a>
+                                    <label> from: </label><a class="article-cruiser">ship 003</a></div>
+                                <div class="article-title">
+                                    <h2>Nothing like this</h2></div>
+                                <div class="article-cover"><img src="https://placem.at/places?w=900&amp;random=0.5451572977472097"></div>
+                                <!--.article-tagsa.tag tag1
+a.tag tag2
+a.tag tag3-->
+                                <div class="article-description">
+                                    <p>.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description</p>
+                                </div>
+                                <div class="article-meta">
+                                    <div class="article-status"><a class="read"><i class="fa fa-eye"></i><span class="count">44</span></a><a class="like"><i class="fa fa-heart-o"></i><span class="count">137</span></a><a class="comment"><i class="fa fa-comment-o"></i><span class="count">286</span></a></div>
+                                    <div class="article-tags"><a class="tag">tag1</a><a class="tag">tag2</a><a class="tag">tag3</a></div>
+                                </div>
+                            </div>
+                            <div class="article-preview style1">
+                                <div class="article-author">
+                                    <div class="user-pic"><img src="" class="user-pic small circle"><i class="fa fa-user"></i></div><a>user 004</a>
+                                    <label> from: </label><a class="article-cruiser">ship 004</a></div>
+                                <div class="article-title">
+                                    <h2>Nothing like this</h2></div>
+                                <div class="article-cover"><img src="https://placem.at/places?w=900&amp;random=0.8633293812163174"></div>
+                                <!--.article-tagsa.tag tag1
+a.tag tag2
+a.tag tag3-->
+                                <div class="article-description">
+                                    <p>.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description</p>
+                                </div>
+                                <div class="article-meta">
+                                    <div class="article-status"><a class="read"><i class="fa fa-eye"></i><span class="count">393</span></a><a class="like"><i class="fa fa-heart-o"></i><span class="count">324</span></a><a class="comment"><i class="fa fa-comment-o"></i><span class="count">83</span></a></div>
+                                    <div class="article-tags"><a class="tag">tag1</a><a class="tag">tag2</a><a class="tag">tag3</a></div>
+                                </div>
+                            </div>
+                            <div class="article-preview style1">
+                                <div class="article-author">
+                                    <div class="user-pic"><img src="" class="user-pic small circle"><i class="fa fa-user"></i></div><a>user 005</a>
+                                    <label> from: </label><a class="article-cruiser">ship 005</a></div>
+                                <div class="article-title">
+                                    <h2>Nothing like this</h2></div>
+                                <div class="article-cover"><img src="https://placem.at/places?w=900&amp;random=0.5297625281382352"></div>
+                                <!--.article-tagsa.tag tag1
+a.tag tag2
+a.tag tag3-->
+                                <div class="article-description">
+                                    <p>.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description</p>
+                                </div>
+                                <div class="article-meta">
+                                    <div class="article-status"><a class="read"><i class="fa fa-eye"></i><span class="count">213</span></a><a class="like"><i class="fa fa-heart-o"></i><span class="count">39</span></a><a class="comment"><i class="fa fa-comment-o"></i><span class="count">251</span></a></div>
+                                    <div class="article-tags"><a class="tag">tag1</a><a class="tag">tag2</a><a class="tag">tag3</a></div>
+                                </div>
+                            </div>
+                            <div class="article-preview style1">
+                                <div class="article-author">
+                                    <div class="user-pic"><img src="" class="user-pic small circle"><i class="fa fa-user"></i></div><a>user 006</a>
+                                    <label> from: </label><a class="article-cruiser">ship 006</a></div>
+                                <div class="article-title">
+                                    <h2>Nothing like this</h2></div>
+                                <div class="article-cover"><img src="https://placem.at/places?w=900&amp;random=0.02312514348886907"></div>
+                                <div class="article-description">
+                                    <p>.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description.article-description</p>
+                                </div>
+                                <div class="article-meta">
+                                    <div class="article-status"><a class="read"><i class="fa fa-eye"></i><span class="count">389</span></a><a class="like"><i class="fa fa-heart-o"></i><span class="count">81</span></a><a class="comment"><i class="fa fa-comment-o"></i><span class="count">87</span></a></div>
+                                    <div class="article-tags"><a class="tag">tag1</a><a class="tag">tag2</a><a class="tag">tag3</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="articles-menu"><a class="item">热门游记</a><a class="item">最新发表</a><a class="item">更多</a>
+                            <div class="new-article">
+                                <div class="ui button blue basic"><i class="edit icon"></i><span>写游记</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="scroll-top"></div>
+    <footer class="container-fluid">
+        <div class="slogan col-xs-12 col-sm-4 col-md-4">
+            <h2>全国首家邮轮分享与点评平台</h2></div>
+        <div class="about col-xs-6 col-sm-3 col-md-3"><a class="about-us">关于我们</a><a class="about-mxcruise">关于漫行</a></div>
+        <div class="site-map col-xs-6 col-sm-3 col-md-3"><a class="site-link">邮轮服务</a><a class="site-link">游记</a><a class="site-link">攻略</a></div>
+        <div class="share-links col-xs-12 col-sm-2 col-md-2">
+            <h3>关注我们</h3><a class="share-link"><i class="fa fa-weixin"></i></a><a class="share-link"><i class="fa fa-weibo"></i></a></div>
+        <script src="/javascripts/jquery-2.1.4.min.js"></script>
+        <!--script(src='//code.jquery.com/jquery-2.1.4.min.js')-->
+        <!--script(src='https://cdn.jsdelivr.net/lodash/3.10.1/lodash.min.js')-->
+        <!--script(src='https://cdn.jsdelivr.net/jquery.ui/1.11.4/jquery-ui.min.js')-->
+        <!--script(src='https://cdn.jsdelivr.net/semantic-ui/2.1.8/semantic.min.js')-->
+        <!--script(src='https://cdn.jsdelivr.net/js-cookie/2.1.0/js.cookie.js')-->
+        <!--script(src='https://cdn.jsdelivr.net/vue/1.0.15/vue.min.js')-->
+        <!--script(src='/javascripts/lodash.min.js')-->
+        <script src="/javascripts/js.cookie.js"></script>
+        <script src="/javascripts/bootstrap.min.js"></script>
+        <!--script(src='/javascripts/vibrant.min.js')-->
+        <script src="/semantic/semantic.min.js"></script>
+        <!--script(src='/javascripts/smoothscroll.js')-->
+        <script src="/javascripts/main.babeled.js"></script>
+    </footer>
+</body>
+
+</html>
