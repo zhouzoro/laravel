@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterCruiseCampusTable extends Migration
+class CreateCruiseCampusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class AlterCruiseCampusTable extends Migration
      */
     public function up()
     {
-        Schema::table('cruise_campus', function (Blueprint $table) {
+        Schema::create('cruise_campus', function (Blueprint $table) {
             $table->integer('vol')->unsigned();
             $table->primary('vol');
             $table->timestamps();
@@ -29,8 +29,6 @@ class AlterCruiseCampusTable extends Migration
      */
     public function down()
     {
-        Schema::table('cruise_campus', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('cruise_campus');
     }
 }
