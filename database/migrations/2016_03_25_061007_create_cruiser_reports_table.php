@@ -25,9 +25,9 @@ class CreateCruiserReportsTable extends Migration
             $table->string('cover');
             $table->string('quote');
             $table->mediumText('content');
-            $table->integer('views_count');
-            $table->integer('likes_count');
-            $table->integer('comments_count');
+            $table->integer('views_count')->default(0);
+            $table->integer('likes_count')->default(0);
+            $table->integer('comments_count')->default(0);
         });
     }
 

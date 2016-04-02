@@ -11,7 +11,6 @@
 |
 */
 use Illuminate\Http\Request;
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,10 +22,9 @@ Route::get('/myAccount','UserController@me');
 Route::resource('cruiser_report','CruiserReportController');
 
 Route::post('/upload/file',function(Request $request){
-	$file = $request->file('file');
-	$extension = $file->getClientOriginalExtension(); // getting image extension
-	$fileName = rand(111111,999999).'.'.$extension;
-    return	$file->move('../../images',$fileName);
+	saveFile($request->file('file'),'file');
+	saveFile($request->file('image'),'image');
+
     });
 
 Route::get('/upload/file',function(){
@@ -35,4 +33,15 @@ Route::get('/upload/file',function(){
 
 Route::controller('user','UserController');
 
+Route::controller('test','test');
 //Route::controller('upload','UploadController');
+
+function saveFile($file, $ftype){
+	if($file){
+		$dpath = '../../' . $ftype . 's';
+		Log::info($dpath);
+		$extension = $file->getClientOriginalExtension(); // getting image extension
+		$fileName = rand(111111,999999).'.'.$extension;
+	    return	$file->move($dpath,$fileName);
+	}
+}

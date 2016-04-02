@@ -1,11 +1,15 @@
-$(document).ready(function () {
+'use strict';
 
-    Cookies.remove('editmode');
+$(document).ready(function () {
+    if (window.location.pathname == '/') Cookies.remove('editmode');
     if ($('.edit-controls') && $('.edit-controls')[0]) {
         Cookies.set('editmode', 'right on', {
             expires: 1
         });
     }
+
+    $('.edit-logo').click(uploadLogo);
+
     $('#sidebar-hidden').find('.item.nav-link').click(function () {
         $('.sidebar').sidebar('hide');
     });
@@ -14,62 +18,161 @@ $(document).ready(function () {
             $(el).addClass("already-visible");
         }
     });
-    showScrollTop();
-    changeHeaderOrNot();
-    $(document).scroll(function () {
+    /*showScrollTop();
+    // changeHeaderOrNot();
+    $(document).scroll(function() {
         showScrollTop();
         scrollStatus.recordScroll();
-        contentAnimate();
+        //contentAnimate();
     });
-    $(window).resize(changeHeaderOrNot);
+    if ($('#app-r') && $('#app-r')[0]) initRefe();
+    //$(window).resize(changeHeaderOrNot);
+    $('.carousel-fade').carousel({
+        interval: 1000 * 8
+    });*/
 });
 
-function makeOnclickAttWork() {
-    return false;
-    if (navigator.userAgent.toLowerCase().lastIndexOf('chrome') == -1 && navigator.userAgent.toLowerCase().lastIndexOf('safari') > -1) {
-        $('.site-title').append('00000');
-        $('*').each(function () {
-            if ($(this).attr('onclick')) {
-                $(this).click(function () {
-                    eval($(this).attr('onclick'));
-                });
+function initRefe() {
+    var vue = new Vue({
+        el: '#app-r',
+        data: {
+            refes: []
+        },
+        methods: {
+            remove: function (refe) {
+                refe.abort();
+                this.refes.$remove(refe);
             }
+        }
+    });
+    var refeManager = initManeger();
+    $('#btn-add').click(function () {
+        vue.refes.push(refeManager.addAtt());
+    });
+    $('#btn-upload').click(function () {
+        $('#loader').modal('show');
+        var loader = $('#loader').find('.loader');
+        var updatep = function (n) {
+            loader.text('uploading ' + n + 'of ' + vue.refes.length);
+        };
+        _.forEach(vue.refes, (val, index) => {
+            index++;
+            updatep(index);
+            console.log(val);
+            var data = {
+                index: val.index,
+                title: val.title,
+                name: val.name,
+                txt: val.txt,
+                source: val.source,
+                path: val.path
+            };
+            $.post('/add_publication', data, function (res) {
+                console.log(res);
+                $('#loader').modal('hide');
+                if (index == vue.refes.length) {
+                    document.location.reload(true);
+                }
+            });
         });
-    } else {
-        $('.site-title').append('1111111');
-    }
-};
+        $('#loader').modal('hide');
+        document.location.reload(true);
+    });
+}
+
+function uploadLogo() {
+    var img = $(this).next('img');
+    var tempImgInput = $('<input>').attr({
+        'type': 'file',
+        'class': 'temp-input'
+    }).css({
+        'display': 'none',
+        'position': 'absolute'
+    }).change(function () {
+
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                img.attr('src', e.target.result);
+            };
+            reader.readAsDataURL(this.files[0]);
+            var fileUploadReq = new XMLHttpRequest();
+            fileUploadReq.withCredentials = false;
+            fileUploadReq.open('POST', '/logo');
+            var formData = new FormData();
+            formData.append('file', this.files[0], this.files[0].name);
+            fileUploadReq.send(formData);
+        }
+    });
+    $('body').append(tempImgInput);
+    tempImgInput.click();
+}
+/*
+function uploadFile(updateProgressFunc) {
+    var tempImgInput = $('<input>').attr({
+        'type': 'file',
+        'class': 'temp-input'
+    }).css({
+        'display': 'none',
+        'position': 'absolute'
+    }).change(function() {
+
+        if (this.files && this.files[0]) {
+            function updateProg(oEvent) {
+                var pct = Math.ceil(100 * oEvent.loaded / oEvent.total);
+                var height = 100 - pct;
+            };
+            var updateProgress = updateProgressFunc ? updateProgressFunc : updateProg;
+            var fileUploadReq = new XMLHttpRequest();
+            fileUploadReq.withCredentials = false;
+            fileUploadReq.open('POST', '/files');
+
+            fileUploadReq.onload = function() {
+                var json = JSON.parse(fileUploadReq.responseText);
+                console.log(json.location);
+                $('.temp-input').remove();
+            };
+            fileUploadReq.upload.addEventListener("progress", updateProgress, false);
+            var formData = new FormData();
+            formData.append('file', this.files[0], this.files[0].name);
+            fileUploadReq.send(formData);
+        }
+    });
+    $('body').append(tempImgInput);
+    tempImgInput.click();
+}*/
 
 function contentAnimate() {
     $('.content-module').each(function (i, el) {
         if (checkVisible(el) && !$(el).hasClass("already-visible")) {
             $(el).addClass("already-visible");
             if (scrollStatus.direction === 'down') {
-                $(el).addClass("come-in");
+                $(el).removeClass('not-visible').addClass("come-in");
             } else {
-                $(el).addClass("come-down");
+                $(el).removeClass('not-visible').addClass("come-down");
             }
         } else if (!checkVisible(el)) {
-            $(el).removeClass("already-visible come-in come-down");
+            $(el).removeClass("already-visible come-in come-down").addClass('not-visible');
         }
     });
 }
 var scrollStatus = {
     scrollRecord: [0, 0],
-    init: function () {
+    init: function init() {
         scrollStatus.setPosition();
     },
-    setPosition: function () {
+    setPosition: function setPosition() {
         scrollStatus.position = $(window).scrollTop();
     },
-    recordScroll: function () {
+    recordScroll: function recordScroll() {
         scrollStatus.scrollRecord[1] = scrollStatus.scrollRecord[0];
         scrollStatus.scrollRecord[0] = $(window).scrollTop() > scrollStatus.position ? -1 : 1;
         scrollStatus.position = $(window).scrollTop();
         scrollStatus.direction = scrollStatus.scrollRecord[0] === -1 ? 'down' : 'up';
         scrollStatus.continuous = scrollStatus.scrollRecord[0] === scrollStatus.scrollRecord[1];
     },
-    adaptResize: function () {
+    adaptResize: function adaptResize() {
         scrollStatus.init();
     }
 };
@@ -86,7 +189,6 @@ function changeHeaderOrNot() {
 }
 
 function toggleSidebar() {
-    alert('ding!');
     $('.sidebar').sidebar('toggle');
 }
 
@@ -98,9 +200,11 @@ function ScrollTop() {
 }
 
 function showScrollTop() {
-    if (!checkVisible($('#top-indicator')) && scrollStatus.direction === 'up') {
+    if (!checkVisible($('#top-indicator'))) {
+        $('#vertical-nv').removeClass("normal").addClass("pinned");
         $('#scroll-top').removeClass("out").addClass("in");
     } else {
+        $('#vertical-nv').removeClass("pinned").addClass("normal");
         $('#scroll-top').removeClass("in").addClass("out");
     }
 }
@@ -122,9 +226,13 @@ function checkVisible(elm, evalType) {
     evalType = evalType || 'visible';
 
     var vpH = $(window).height(),
-        // Viewport Height
+
+
+    // Viewport Height
     st = $(window).scrollTop(),
-        // Scroll Top
+
+
+    // Scroll Top
     y = $(elm).offset().top,
         elementHeight = $(elm).height();
 
@@ -139,24 +247,43 @@ function scrollTo(eleId) {
     }, '500');
 }
 $('.edit-controls').each(function () {
+    var _this = this;
+
     var editControl = $(this);
     $(this).find('.save-btn').hide();
-    if ($(this).parent().find('.editable') && $(this).parent().find('.editable')[0]) {
+    if (editControl.data('type') == 'publication') {
+        var publication = editControl.parent('.publication');
+        var editor = $(this).parent().find('.edit-only');
+        $(this).find('.edit-btn').click(function () {
+            $(_this).find('.edit-btn').hide();
+            $(_this).find('.save-btn').show();
+            editor.css('display', 'inline-block');
+            editor.prev('.edit-hidden').css('display', 'none');
+            $(_this).find('.save-btn').click(function () {
+                var data = {
+                    id: $(_this).data('id'),
+                    index: editor.find('.att-index').val(),
+                    txt: editor.find('.att-txt').val(),
+                    source: editor.find('.att-source').val()
+                };
+                $.post('/add_publication', data, function (res) {
+                    console.log(res);
+                    document.location.reload(true);
+                });
+            });
+        });
+    } else if ($(this).parent().find('.editable') && $(this).parent().find('.editable')[0]) {
         var editor = $(this).parent().find('.editable');
-        console.log(editor);
         editor.addClass('editing edit-disabled');
-        $(this).find('.edit-btn').click(() => {
-            $(this).find('.edit-btn').hide();
-            $(this).find('.save-btn').show();
-            $(this).find('.save-btn').click(function () {
-                console.log(1);
-                if (editControl.data('type') == 'about') {
-                    var data = { html: tinymce.activeEditor.save() };
-                    $.post('/change/about', data, function (res) {
-                        console.log(res);
-                        document.location.reload(true);
-                    });
-                }
+        $(this).find('.edit-btn').click(function () {
+            $(_this).find('.edit-btn').hide();
+            $(_this).find('.save-btn').show();
+            $(_this).find('.save-btn').click(function () {
+                var data = { html: tinymce.activeEditor.save() };
+                $.post('/change/' + editControl.data('type'), data, function (res) {
+                    console.log(res);
+                    document.location.reload(true);
+                });
             });
             var editArea = '#' + editor.attr('id');
             editor.removeClass('edit-disabled');
@@ -165,15 +292,15 @@ $('.edit-controls').each(function () {
     } else if ($(this).parent().find('.edit-only') && $(this).parent().find('.edit-only')[0]) {
         var editor = $(this).parent().find('.edit-only');
         console.log(editor);
-        $(this).find('.edit-btn').click(() => {
-            $(this).find('.edit-btn').hide();
-            $(this).find('.save-btn').show();
+        $(this).find('.edit-btn').click(function () {
+            $(_this).find('.edit-btn').hide();
+            $(_this).find('.save-btn').show();
             editor.css('display', 'inline-block');
             editor.prev('.edit-hidden').css('display', 'none');
             initUploadOf(editControl.data('type'), editControl.data('id'));
         });
     }
-    $(this).find('.delete-btn').click(() => {
+    $(this).find('.delete-btn').click(function () {
         $('#loader').modal('show');
         var loader = $('#loader').find('.loader');
         loader.text('ing!');
@@ -187,9 +314,6 @@ $('.edit-controls').each(function () {
                 loader.text('loading');
             }
         });
-    });
-    Cookies.set('editmode', true, {
-        expires: 1
     });
 });
 
@@ -206,9 +330,10 @@ function initMce(selector, docId) {
     tinymce.init({
         selector: selector,
         skin: 'mymce1',
+        language: 'zh_CN',
         content_css: '/stylesheets/mce.min.css',
         inline: inline,
-        plugins: 'table contextmenu autoresize',
+        plugins: 'table contextmenu autoresize contextmenu paste image imagetools preview',
         style_formats: [{ title: 'H1', block: 'h1' }, { title: 'H2', block: 'h2' }, { title: 'H3', block: 'h3' }, { title: 'Bold text', inline: 'strong' }, { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } }, { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } }, { title: 'Badge', inline: 'span', styles: { display: 'inline-block', border: '1px solid #2276d2', 'border-radius': '5px', padding: '2px 5px', margin: '0 2px', color: '#2276d2' } }, { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }],
         formats: {
             alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'left' },
@@ -223,7 +348,7 @@ function initMce(selector, docId) {
         },
         //content_css: '/stylesheets/person.min.css',
         //plugins: "advlist lists link anchor contextmenu paste image autoresize preview imagetools lists",
-        //toolbar: 'formatselect fontsizeselect bold italic underline strikethrough alignleft aligncenter alignright advlist lists link image preview',
+        toolbar: 'formatselect fontsizeselect bold italic underline strikethrough alignleft aligncenter alignright alignfull advlist lists link image preview',
         image_caption: true,
         paste_data_images: true,
         //block_formats: 'Paragraph=p;Header 1=h1;Header 2=h2;Header 3=h3',
@@ -234,27 +359,23 @@ function initMce(selector, docId) {
         images_upload_url: '/images',
         statusbar: false
     });
-    //console.log(tinymce.editors.length);
-    //setTimeout(function(){console.log(tinymce.editors.length);},1000);
 }
 $('.add-btn').click(function () {
-    $('#loader').modal('show');
+    var transloader = $('<div>').attr('class', 'expand-transition');
+    $(this).append(transloader);
     var targetUrl = $(this).data('url');
     var uploadType = $(this).data('type');
-    console.log(targetUrl);
     $.get(targetUrl, function (res) {
         $('#modal-cust').find('.container').html(res);
-        makeOnclickAttWork();
         $('#btn-cancel').click(function () {
             $('#body').show();
             $('#modal-cust').hide('fast');
             $('#modal-cust').find('.container').html('');
         });
-        //$('#modal').modal('show');
-        $('#loader').modal('hide');
-        $('#modal-cust').show('fast');
-        $('#body').hide();
+        $('#modal-cust').show('slow');
+        $('#body').hide('slow');
         initUploadOf(uploadType);
+        transloader.remove();
         $('#edit-pic').click(uploadPic);
     });
 });
@@ -277,10 +398,9 @@ function uploadPic() {
             reader.onload = function (e) {
                 img.attr('src', e.target.result);
             };
-
             reader.readAsDataURL(this.files[0]);
             label.removeClass('btn').addClass('pct');
-            var updateProgress = oEvent => {
+            var updateProgress = function updateProgress(oEvent) {
                 var pct = Math.ceil(100 * oEvent.loaded / oEvent.total);
                 var height = 100 - pct;
                 loader.css({ 'height': height + 'px' });
@@ -290,7 +410,7 @@ function uploadPic() {
             fileUploadReq.withCredentials = false;
             fileUploadReq.open('POST', '/images');
 
-            fileUploadReq.onload = () => {
+            fileUploadReq.onload = function () {
                 var json = JSON.parse(fileUploadReq.responseText);
                 console.log(json.location);
                 img.attr('src', json.location);
@@ -313,29 +433,46 @@ function computProgress(oEvent) {
 }
 
 function Att() {
-    this.title = '';
+    var _this2 = this;
+    this.index = 0;
+    this.txt = '';
     this.name = '';
     this.source = '';
     this.path = '';
     this.progress = '0%';
-    this.updateProgress = oEvent => {
-        this.progress = computProgress(oEvent);
+    this.updateProgress = function (oEvent) {
+        _this2.progress = computProgress(oEvent);
     };
     var fileUploadReq = new XMLHttpRequest();
     fileUploadReq.withCredentials = false;
     fileUploadReq.open('POST', '/files');
 
-    fileUploadReq.onload = () => {
+    fileUploadReq.onload = function () {
         var json = JSON.parse(fileUploadReq.responseText);
-        this.path = json.location;
+        _this2.path = json.location;
     };
     fileUploadReq.upload.addEventListener("progress", this.updateProgress, false);
-    this.uploadFile = ele => {
-        this.name = ele.files[0].name;
-        var form = $(ele).parent('.frmfile')[0];
-        var formData = new FormData(form);
-        fileUploadReq.send(formData);
-        $('.temp-input').remove();
+    this.uploadFile = function () {
+        var tempImgInput = $('<input>').attr({
+            'type': 'file',
+            'class': 'temp-input'
+        }).css({
+            'display': 'none',
+            'position': 'absolute'
+        }).change(function () {
+            if (this.files && this.files[0]) {
+                var formData = new FormData();
+                _this2.name = this.files[0].name;
+                formData.append('file', this.files[0], this.files[0].name);
+                fileUploadReq.onload = function () {
+                    var json = JSON.parse(fileUploadReq.responseText);
+                    _this2.path = json.location;
+                };
+                fileUploadReq.send(formData);
+            }
+        });
+        $('body').append(tempImgInput);
+        tempImgInput.click();
     };
     this.abort = function () {
         fileUploadReq.abort();
@@ -347,31 +484,17 @@ function initManeger() {
         atts: {}
     };
     var attCount = 0;
-    e.states = []; //Array of upload process states, '1' means complete
     e.addAtt = function () {
-        e.states.push(0);
         attCount++;
         var attname = 'att' + attCount;
         var newAtt = new Att();
+        newAtt.uploadFile();
         e.atts[attname] = newAtt;
-        var tempImgInput = $('<input>').attr({
-            'type': 'file',
-            'class': 'temp-input'
-        }).css({
-            'display': 'none',
-            'position': 'absolute'
-        }).change(function () {
-            if (this.files && this.files[0]) {
-                newAtt.uploadFile(this);
-            }
-        });
-        $('body').append(tempImgInput);
-        tempImgInput.click();
         return newAtt;
     };
-    e.wrapUp = function () {
+    e.wrapUp = function (atts) {
         var html = '';
-        _.forEach(vue.atts, function (att, index) {
+        _.forEach(atts, function (att, index) {
             index++;
             html += '<p>附件.' + index + '： <a href="' + att.path + '" download="' + att.name + '">' + att.name + '</a>' + '</p>';
         });
@@ -384,15 +507,33 @@ function initUploadOf(type, docId) {
     initMce('#input-body', docId);
     if (type === 'people') {
         console.log('uploading type of ' + type);
+        $('#btn-upload').click(function () {
+            $('#loader').modal('show');
+            var people = $('#upload-people');
+            var data = {
+                name: people.find('#input-name').val(),
+                picture: people.find('#profile-pic').find('img').attr('src'),
+                title: people.find('#input-title').val(),
+                degree: people.find('#input-degree').val(),
+                office: people.find('#input-office').val(),
+                email: people.find('#input-email').val(),
+                phone: people.find('#input-phone').val(),
+                details: tinymce.activeEditor.save()
+            };
+            if (docId) data.id = docId;
+            $.post('/add_people', data, function (res) {
+                if (docId) document.location.reload(true);else window.location = res.url;
+            });
+        });
     } else {
         var attManager = initManeger();
-        vue = new Vue({
+        var vue = new Vue({
             el: '#app',
             data: {
                 atts: []
             },
             methods: {
-                remove: function (att) {
+                remove: function remove(att) {
                     att.abort();
                     this.atts.$remove(att);
                 }
@@ -425,27 +566,8 @@ function initUploadOf(type, docId) {
         $('#btn-att').click(function () {
             vue.atts.push(attManager.addAtt());
         });
-    }
-
-    $('#btn-upload').click(function () {
-        $('#loader').modal('show');
-        if (type === 'people') {
-            var people = $('#upload-people');
-            var data = {
-                name: people.find('#input-name').val(),
-                picture: people.find('#profile-pic').find('img').attr('src'),
-                title: people.find('#input-title').val(),
-                degree: people.find('#input-degree').val(),
-                office: people.find('#input-office').val(),
-                email: people.find('#input-email').val(),
-                phone: people.find('#input-phone').val(),
-                details: tinymce.activeEditor.save()
-            };
-            if (docId) data.id = docId;
-            $.post('/add_people', data, function (res) {
-                if (docId) document.location.reload();else window.location = res.url;
-            });
-        } else {
+        $('#btn-upload').click(function () {
+            $('#loader').modal('show');
             var loader = $('#loader').find('.loader');
             loader.text('uploading Images');
             tinymce.activeEditor.uploadImages(function (success) {
@@ -465,11 +587,11 @@ function initUploadOf(type, docId) {
                 var posturl = '/add_' + type;
                 $.post(posturl, data, function (res) {
                     $('#loader').modal('hide');
-                    if (docId) document.location.reload();else window.location = res.url;
+                    if (docId) document.location.reload(true);else window.location = res.url;
                 });
             });
-        }
-    });
+        });
+    }
 }
 
 function GetCurrentDate() {
@@ -477,50 +599,6 @@ function GetCurrentDate() {
     var month = cdate.getMonth() < 9 ? '0' + (cdate.getMonth() + 1) : cdate.getMonth() + 1;
     var currentDate = cdate.getFullYear() + "-" + month + "-" + cdate.getDate();
     return currentDate;
-}
-
-function uploadContent(type) {
-    $('#loader').modal('show');
-    var loader = $('#loader').find('.loader');
-    loader.text('gathering');
-    if (type === 'people') {
-
-        var people = $('#upload-people');
-
-        var data = {
-            name: people.find('#input-name').val(),
-            picture: people.find('#profile-pic').find('img').attr('src'),
-            title: people.find('#input-title').val(),
-            office: people.find('#input-office').val(),
-            email: people.find('#input-email').val(),
-            phone: people.find('#input-phone').val(),
-            details: tinymce.activeEditor.save()
-        };
-        console.log(data);
-        $.post('/add_people', data, function (res) {
-            window.location = res.url;
-        });
-    } else if (type === '???') {
-
-        tinymce.activeEditor.uploadImages(function (success) {
-            loader.text('wrapping together');
-            var attHtml = attManager.wrapUp(vue.atts);
-            var data = {
-                title: $('#input-title').val(),
-                date: $('#input-date').val(),
-                source: $('#input-source').val(),
-                cover: $(tinymce.activeEditor.save()).find('img').attr('src'),
-                quote: getQuoteText(tinymce.activeEditor.save()),
-                body: tinymce.activeEditor.save() + attHtml,
-                att: attHtml
-            };
-            loader.text('uploading');
-            $.post('/add_new_proj', data, function (res) {
-                $('#loader').modal('hide');
-                window.location = res.url;
-            });
-        });
-    }
 }
 
 function getQuoteText(htmlStr) {

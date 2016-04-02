@@ -7,8 +7,9 @@ $(document).ready(function() {
             expires: 1
         });
     }
-    console.log(111);
+
     $('.edit-logo').click(uploadLogo);
+
     $('#sidebar-hidden').find('.item.nav-link').click(function() {
         $('.sidebar').sidebar('hide');
     });
@@ -29,7 +30,7 @@ $(document).ready(function() {
     $('.carousel-fade').carousel({
         interval: 1000 * 8
     });*/
-    
+
 });
 
 function initRefe() {
@@ -55,7 +56,7 @@ function initRefe() {
         var updatep = function(n) {
             loader.text('uploading ' + n + 'of ' + vue.refes.length);
         }
-        _.forEach(vue.refes, function(val, index) {
+        _.forEach(vue.refes, (val, index) => {
             index++;
             updatep(index);
             console.log(val);

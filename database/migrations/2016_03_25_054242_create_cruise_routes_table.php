@@ -19,9 +19,9 @@ class CreateCruiseRoutesTable extends Migration
             $table->string('nodes');
             $table->mediumText('description');
             $table->integer('likes_count');
-            $table->integer('comments_count');
-            $table->integer('visited_count');
-            $table->integer('wished_count');
+            $table->integer('comments_count')->default(0);
+            $table->integer('visited_count')->default(0);
+            $table->integer('wished_count')->default(0);
         });
     }
 

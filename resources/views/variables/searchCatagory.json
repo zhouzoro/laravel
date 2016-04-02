@@ -1,0 +1,16 @@
+[{
+    "id": "all",
+    "name": "全部",
+}, {
+    "id": "cheat-sheet",
+    "name": "邮轮",
+}, {
+    "id": "dest",
+    "name": "游记",
+}, {
+    "id": "cruiser",
+    "name": "攻略",
+}, {
+    "id": "community",
+    "name": "社区",
+}, ]
