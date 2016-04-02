@@ -12,7 +12,7 @@
 */
 use Illuminate\Http\Request;
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.index');
 });
 Route::get('/test', function () {
     return 'hello its me';
@@ -33,7 +33,7 @@ Route::get('/upload/file',function(){
 
 Route::controller('user','UserController');
 
-Route::controller('test','test');
+//Route::controller('test','test');
 //Route::controller('upload','UploadController');
 
 function saveFile($file, $ftype){
