@@ -1,4 +1,4 @@
-var scrollStatus = {
+/*var scrollStatus = {
     referent: '',
     scrollRecord: [0, 0],
     position: 0,
@@ -39,3 +39,4 @@ var scrollStatus = {
 $(document).ready(scrollStatus.init);
 $(document).scroll(scrollStatus.recordScroll);
 $(window).resize(scrollStatus.adaptResize);
+*/

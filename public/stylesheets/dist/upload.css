@@ -1,9 +1,13 @@
-.mce-toolbar-grp.mce-container.mce-panel.mce-stack-layout-item.mce-first {
-  border: 1px solid #A7CDCC;
-}
-
+.mce-toolbar-grp.mce-container.mce-panel.mce-stack-layout-item.mce-first,
 .mce-toolbar-grp.mce-container.mce-panel.mce-abs-layout-item.mce-first.mce-last {
   border: 1px solid #A7CDCC;
+  transition: position 0.6s;
+}
+
+.mce-toolbar-grp.mce-container.mce-panel.mce-stack-layout-item.mce-first.pinned,
+.mce-toolbar-grp.mce-container.mce-panel.mce-abs-layout-item.mce-first.mce-last.pinned {
+  position: fixed;
+  top: 4px;
 }
 
 #ul_title {
@@ -27,7 +31,11 @@
 }
 
 #ops {
-  padding: 8px;
+  padding: 8px 20px;
+  background: white;
+}
+
+#ops.pinned {
   position: fixed;
   bottom: 4px;
 }

@@ -10,19 +10,20 @@ var elixir = require('laravel-elixir');
  | file for our application, as well as publishing vendor resources.
  |
  */
-var gulp = require('gulp'),
-    sass = require('gulp-ruby-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
-    cssnano = require('gulp-cssnano'),
-    jshint = require('gulp-jshint'),
-    uglify = require('gulp-uglify'),
-    imagemin = require('gulp-imagemin'),
-    rename = require('gulp-rename'),
-    concat = require('gulp-concat'),
-    notify = require('gulp-notify'),
-    cache = require('gulp-cache'),
-    livereload = require('gulp-livereload'),
-    del = require('del');
+var gulp = require('gulp');
+var sass = require('gulp-ruby-sass');
+var autoprefixer = require('gulp-autoprefixer');
+var cssnano = require('gulp-cssnano');
+var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
+var imagemin = require('gulp-imagemin');
+var rename = require('gulp-rename');
+var concat = require('gulp-concat');
+var notify = require('gulp-notify');
+var cache = require('gulp-cache');
+var sourcemaps = require('gulp-sourcemaps');
+var livereload = require('gulp-livereload');
+var del = require('del');
 var babel = require("gulp-babel");
 
 gulp.task('default', ['clean'], function() {
@@ -50,6 +51,7 @@ gulp.task('styles', function() {
 
 gulp.task('scripts', function() {
     return gulp.src('public/javascripts/*.js')
+        .pipe(sourcemaps.init())
         .pipe(rename({
             suffix: '.babeled'
         }))
@@ -59,6 +61,7 @@ gulp.task('scripts', function() {
             suffix: '.min'
         }))
         .pipe(uglify())
+        .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('public/javascripts/dist'))
         .pipe(notify({
             message: 'Scripts task complete.'

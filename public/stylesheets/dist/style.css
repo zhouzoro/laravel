@@ -3,6 +3,10 @@ html, body, h1, h2, h3, h4, h5, a, button, label, .button {
   font-family: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, “Microsoft YaHei”, “微软雅黑”, SimSun, “宋体”, Heiti, “黑体”, sans-serif;
 }
 
+header {
+  border-bottom: 1px solid #3FBAC2;
+}
+
 .container-fluid {
   padding: 0px;
 }
@@ -15,11 +19,53 @@ html, body, h1, h2, h3, h4, h5, a, button, label, .button {
   border-left: 1px solid lightgray;
 }
 
-#nav {
+.ui.sidebar.left.vertical.menu .logo {
+  position: relative;
+  height: 81px;
+  bottom: 0px;
+  font-size: 54px;
+  font-family: "Matura MT Script Capitals", "Algerian";
+}
+.ui.sidebar.left.vertical.menu .logo img {
   top: 0px;
-  padding: 0px 24px;
+  padding-top: 0px;
+  height: 81px;
+}
+.ui.sidebar.left.vertical.menu .menu {
+  color: white;
+  z-index: 9999;
+}
+.ui.sidebar.left.vertical.menu .menu .menu-item {
+  overflow: hidden;
   opacity: 0.8;
-  min-height: 96px;
+}
+.ui.sidebar.left.vertical.menu .menu .menu-item a.item {
+  width: 100%;
+  color: #3FBAC2;
+  display: block;
+  padding: 12px 16px 8px 12px;
+  font-size: 20px;
+  border-bottom: 1px solid gray;
+}
+.ui.sidebar.left.vertical.menu .menu .menu-item .sub-menu {
+  margin-left: 16px;
+  background: white;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+.ui.sidebar.left.vertical.menu .menu .menu-item .sub-menu a.item-sub {
+  color: #3FBAC2;
+  display: block;
+  padding: 8px 8px 8px 12px;
+  border-bottom: 1px solid lightgray;
+  font-size: 16px;
+}
+.ui.sidebar.left.vertical.menu .menu .menu-item .sub-menu a.item-sub:last-child {
+  border-color: transparent;
+}
+
+#nav {
+  height: 81px;
   width: 100%;
   z-index: 2;
   background: rgba(255, 255, 255, 0.9);
@@ -29,74 +75,118 @@ html, body, h1, h2, h3, h4, h5, a, button, label, .button {
   display: inline-block;
   color: white;
 }
+#nav #sidebar-toggle {
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+}
 #nav .logo {
   position: relative;
-  top: 0px;
-  padding-top: 0px;
+  height: 81px;
+  bottom: 0px;
   font-size: 54px;
-  padding-right: 50px;
   font-family: "Matura MT Script Capitals", "Algerian";
 }
 #nav .logo img {
   top: 0px;
   padding-top: 0px;
-  height: 96px;
+  height: 81px;
 }
 #nav .menu {
-  position: relative;
-  bottom: -20px;
-  vertical-align: baseline;
+  position: absolute;
+  top: 44px;
   color: white;
+  z-index: 9999;
 }
-#nav .menu a.item {
-  color: black;
-  display: inline-block;
-  margin: 0px 4px 0px 4px;
-  padding: 12px 16px 16px 16px;
-  font-size: 24px;
+#nav .menu .menu-item {
+  overflow: hidden;
+  opacity: 0.8;
 }
-#nav .menu a.item:hover {
-  color: white;
-  background: #3FBAC2;
+#nav .menu .menu-item a.item {
+  width: 100%;
+  color: #3FBAC2;
+  display: block;
+  margin: 8px 16px 8px 16px;
+  font-size: 20px;
+}
+#nav .menu .menu-item .sub-menu {
+  position: absolute;
+  background: white;
+  top: 36px;
+  overflow: hidden;
+  height: 0px;
+  transition: all 0.5s ease;
+}
+#nav .menu .menu-item .sub-menu a.item-sub {
+  color: #3FBAC2;
+  display: block;
+  margin: 2px 8px 4px 8px;
+  padding: 4px 8px 6px 12px;
+  border-bottom: 1px solid lightgray;
+  font-size: 16px;
+}
+#nav .menu .menu-item .sub-menu a.item-sub:last-child {
+  border-color: transparent;
+}
+#nav .menu .menu-item:hover {
+  opacity: 1;
+}
+#nav .menu .menu-item:hover .sub-menu {
+  height: auto;
+  box-shadow: 0px 0px 2px 0px #3FBAC2;
 }
 #nav .login-container {
-  padding: 28px 24px 12px 24px;
   float: right;
+  padding: 42px 12px 0px 12px;
+}
+#nav .login-container div {
+  display: inline-block;
 }
 #nav .login-container .out-links {
-  padding: 8px 12px 12px 12px;
+  display: inline-block;
+  padding: 2px 8px 2px 8px;
 }
-#nav .login-container a.out-link {
+#nav .login-container .out-links .out-link {
   color: #3FBAC2;
   border: 1px solid;
-  padding: 8px;
-  margin: 4px;
-  border-radius: calc(50% + 8px);
+  width: 32px;
+  height: 32px;
+  padding-top: 6px;
+  padding-left: 8px;
+  margin: 2px;
+  border-radius: 32px;
 }
-#nav .login-container a.out-link i {
+#nav .login-container .out-links .out-link i {
   color: #3FBAC2;
 }
-#nav .login-container .ui.button {
-  margin-right: 12px;
+#nav .login-container .direct-ops a {
+  display: inline-block;
+  padding: 4px;
+  border-left: 1px solid lightgray;
 }
-#nav .search.ui.input.action {
-  background: transparent;
-  padding: 12px;
-}
-#nav .search.ui.input.action input, #nav .search.ui.input.action select, #nav .search.ui.input.action .ui.button {
-  background: transparent;
-}
-#nav .search.ui.input.action select.ui.compact.selection.dropdown {
-  padding: 4px 8px;
+#nav .login-container .direct-ops a:first-child {
+  border-color: transparent;
 }
 
+@media(max-width:999px) {
+  #nav .login-container {
+    padding-top: 2px;
+  }
+}
+@media(max-width:768px) {
+  #nav #sidebar-toggle {
+    display: inline-block;
+  }
+  #nav .menu {
+    display: none;
+  }
+  #nav .login-container {
+    padding-top: 42px;
+  }
+}
 .card-split {
   background: white;
   margin: 24px 2px 24px 2px;
-}
-
-#nav:hover {
-  opacity: 1;
 }
 
 #search-home {
@@ -108,9 +198,9 @@ html, body, h1, h2, h3, h4, h5, a, button, label, .button {
 }
 #search-home .search-container {
   margin: 4px;
-  padding: 12px 24px 12px 24px;
+  padding: 24px 24px 24px 24px;
   border-radius: 5px;
-  background: rgba(26, 26, 26, 0.6);
+  background: rgba(44, 44, 44, 0.6);
   box-shadow: 0px 0px 12px -6px rgba(199, 199, 199, 0.8);
 }
 #search-home .search-container .selections.ui.form .inline.fields .field {
@@ -119,14 +209,17 @@ html, body, h1, h2, h3, h4, h5, a, button, label, .button {
 #search-home .search-container .selections.ui.form .inline.fields .field .ui.radio.checkbox label {
   color: white;
 }
-#search-home .search-container .search-bar .ui.input.tansparent {
+#search-home .search-container .search-bar .ui.category.search {
   width: 100%;
 }
-#search-home .search-container .search-bar .ui.input.tansparent input {
+#search-home .search-container .search-bar .ui.icon.input {
   width: 100%;
 }
-#search-home .search-container .search-bar .ui.input.tansparent i {
+#search-home .search-container .search-bar .ui.icon.input i {
   cursor: pointer;
+}
+#search-home .search-container .search-submit {
+  display: none;
 }
 
 #carousel-home {
@@ -340,21 +433,33 @@ html, body, h1, h2, h3, h4, h5, a, button, label, .button {
 }
 
 footer {
-  background: #2C3E50;
+  background: white;
+  border-top: 1px solid #3FBAC2;
+  margin-top: 12px;
   min-height: 128px;
   text-align: center;
-  color: silver;
+  color: black;
+}
+footer .footer-sub-container {
+  padding: 12px;
+}
+footer .footer-sub-container .footer-sub {
+  min-height: 128px;
+  border-left: 1px solid #3FBAC2;
+}
+footer .footer-sub-container:first-child .footer-sub {
+  border-left: none;
 }
 footer div {
   padding-top: 24px;
   text-align: center;
 }
 footer a {
-  color: silver;
+  color: black;
   padding: 2px 8px;
 }
 footer a:hover {
-  color: silver;
+  color: black;
   border-bottom: 1px solid;
 }
 footer a.share-link {

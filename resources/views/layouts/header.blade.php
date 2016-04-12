@@ -1,12 +1,30 @@
 <header>
     <div id="nav">
-        <div class="logo"><img src="/images/logo.normal.jpg"></div>
+        <a id='sidebar-toggle' onclick='toggleSidebar()'>
+            <i class='fa fa-bars'></i>
+        </a>
+        <div class="logo-container no-boundry">
+            <a class="logo" href='/'>
+                <img src="/images/logo.normal.jpg">
+            </a>
+        </div>
         @include('layouts.mainMenu')
         <div class="login-container">
-            <div class="out-links"><a class="out-link"><i class="fa fa-qq"></i></a><a class="out-link"><i class="fa fa-weixin"></i></a><a class="out-link"><i class="fa fa-weibo"></i></a></div>
+            <div class="out-links">
+                <div class="out-link qq">
+                    <i class="fa fa-qq"></i>
+                </div>
+                <div class="out-link weixin">
+                    <i class="fa fa-weixin"></i>
+                </div>
+                <div class="out-link weibo">
+                    <i class="fa fa-weibo"></i>
+                </div>
+            </div>
             <div class="direct-ops">
-                <div class="ui button login green basic">登录</div>
-                <div class="ui button signup blue basic">注册</div>
+                <a class="login">登录</a>
+                <span>|</span>
+                <a class="signup">注册</a>
             </div>
         </div>
     </div>

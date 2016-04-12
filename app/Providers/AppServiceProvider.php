@@ -66,10 +66,6 @@ class AppServiceProvider extends ServiceProvider
                 "id" => "tips",
                 "name" => "攻略",
             ],
-            [
-                "id" => "community",
-                "name" => "社区",
-            ],
         ];
         view()->share('menuItems', $menuItems);
         view()->share('searchCategories', $searchCategories);

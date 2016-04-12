@@ -1,4 +1,5 @@
 var myUpload = function() {
+
     var mce = {};
     var vue;
 
@@ -40,7 +41,6 @@ var myUpload = function() {
         })
         return p
     }
-
 
     function Att() {
         this.title = '';
@@ -111,6 +111,7 @@ var myUpload = function() {
         }
         return e;
     };
+    
     mce.init = function(type) {
         console.log(type);
         if (type == 'refe') {
