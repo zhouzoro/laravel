@@ -24,14 +24,16 @@
         <div id="sidebar-hidden" class='ui left inline vertical sidebar menu'>
             @include('layouts.mainMenu')
         </div>
-        <!--common header-->
-        @include('layouts.header')
+        <div class='pusher'>
+            <!--common header-->
+            @include('layouts.header')
 
-        <!--body to show-->
-        @section('main')
-        @show
+            <!--body to show-->
+            @section('main')
+            @show
 
-        @include('layouts.footer')
+            @include('layouts.footer')
+        </div>
 
         @section('common-scripts')
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>

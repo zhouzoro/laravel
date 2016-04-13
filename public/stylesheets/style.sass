@@ -21,10 +21,16 @@ header
 
 .container-fluid
 	padding: 0px
+
 .no-boundry
 	padding: 0px
+
 .border-left
 	border-left: $light-border 
+
+.cursor-pointer
+	cursor: pointer
+
 .ui.sidebar.left.vertical.menu
 	.logo
 		position: relative
@@ -263,23 +269,79 @@ header
 	.side-poster
 		height: 324px
 		width: 100%
-#report
-	height: 289px
+
+.content-side-right.col-xs-12.col-sm-4.col-md-4.col-lg-4
+	display: none
+
+//==IfoCenter=============================//
+.info-center
 	border: $light-border
-	.report-compo
-		padding: 8px
+	margin: 24px 0px
+	div
+		border: $light-border
+	.title,.title-container,.service-menu,.content-container
+		width: 100%
+		text-align: center
+	.service-menu
+		height: 34px
 		.item
-			padding: 2px
-			border-bottom: $light-border
-			height: 108px
-			img
-				display: inline-block
-				width: 30%
-				height: 84px
-			.title
-				margin-left: 5%
-				width: 60%
-				display: inline-block
+			position: relative
+			top: 0px
+			padding: 8px 12px
+			font-size: 16px
+			color: $bg
+			cursor: pointer
+		.item:hover
+			border-bottom: 2px solid $bg
+			padding: 8px 12px
+	.info-content-container
+		overflow: hidden
+		height: 221px
+		width: 100%
+		.info-content-list
+			width: 100%
+			.info-content
+				width: 100%
+				display: flex
+				padding: 8px
+				.item-container
+					flex-grow: 1
+					padding: 8px
+					a.item
+						height: 189px
+						overflow: hidden
+						.img-container,.title-container
+							width: 100%
+						.img-container
+							height: 189px
+							overflow: hidden
+							img
+								width: 100%
+								height: 100%
+								object-fit: cover
+								transition: all 0.6s ease
+						.title-container
+							height: 34px
+							position: relative
+							top: -34px
+							padding: 4px
+							background: $bg
+							label.title
+								font-size: 20px
+								color: white
+								margin: auto
+					a.item:hover
+						img
+							width: 110%
+							height: 110%
+							transform: translateX(-5%) translateY(-5%)
+						.title-container
+							opacity: 0.6
+
+
+#report
+	border: $light-border
+	overflow: hidden
 
 	.report-poster
 		height: 289px
@@ -304,7 +366,45 @@ header
 			display: inline-block
 			position: relative
 			top: 4px
-
+	.report-compo
+		padding: 8px
+		.item
+			padding: 4px
+			border-bottom: $light-border
+			height: 108px
+			.img-container
+				width: 33%
+				height: 1px
+				display: inline-block
+				img
+					width: 100%
+					height: 100px
+					object-fit: cover
+			.title
+				margin-left: 5%
+				width: 60%
+				height: 1px
+				display: inline-block
+	.report-compo.report-intro
+		.report-container-mini
+			height: 216px
+			overflow: hidden
+			border: $light-border
+			.report-intro-list
+				transition: all 0.6s ease
+		a.report-intro-list-nav
+			padding: 1px 12px
+			height: 24px
+			text-align: center
+			background: $bg
+			color: white
+			border: 1px solid
+			cursor: pointer
+			i
+				font-size: 16px
+		a.report-intro-list-nav:hover
+			background: white
+			color: $bg
 #articles-container
 	padding-left: 6px
 	margin-left: 8px
@@ -330,6 +430,7 @@ header
 	img
 		width: 100%
 		height: 100%
+		object-fit: cover
 #articles-list
 	.article-preview
 		width: 100%
@@ -368,8 +469,6 @@ header
 		//.txt-container
 			padding: 24px 12px
 
-.cursor-pointer
-	cursor: pointer
 footer
 	background: white
 	border-top: 1px solid $bg
@@ -397,6 +496,18 @@ footer
 		border-bottom: 1px solid
 	a.share-link
 		font-size: 24px
+@media(max-width:768px)
+	footer
+		.footer-sub-container 
+			.footer-sub
+				min-height: 48px
+				border-top: 1px solid $bg
+				border-left: none
+
+		.footer-sub-container:first-child
+			.footer-sub
+				border-top: none
+				border-left: none
 
 #news.side-poster
 	ul
@@ -495,18 +606,8 @@ img.user-pic.small.circle
 	opacity: 1
 
 @media(max-width:768px)
-	#search-home
-		//padding: 0px 124px 0px 124px
 	#carousel-thumbnail
 		display: none
-	#nav
-		.menu
-			a.item
-				padding: 12px 12px 12px 12px
-
-@media(max-width:480px)
-	#search-home
-		//padding: 0px 12px 0px 12px
 	.login-container
 		text-align: center
 	#carousel-home
@@ -524,3 +625,46 @@ img.user-pic.small.circle
 	#nav
 		.menu
 			display: none
+	.content-side-left.col-xs-12.col-sm-4.col-md-4.col-lg-4
+		display: none
+	.content-side-right.col-xs-12.col-sm-4.col-md-4.col-lg-4
+		display: block
+
+/*==upload=====================*/
+
+.mce-toolbar-grp.mce-container.mce-panel.mce-stack-layout-item.mce-first,
+.mce-toolbar-grp.mce-container.mce-panel.mce-abs-layout-item.mce-first.mce-last
+	border: 1px solid $bg
+	transition: position 0.6s
+
+.mce-toolbar-grp.mce-container.mce-panel.mce-stack-layout-item.mce-first.pinned,
+.mce-toolbar-grp.mce-container.mce-panel.mce-abs-layout-item.mce-first.mce-last.pinned
+	position: fixed
+	top: 4px
+
+#ul_title
+	padding: 5px 5px 20px 20px
+	.title
+		padding: 12px 0px
+		font-size: 24px
+		line-height: 150%
+		width: 100%
+		text-align: center
+
+#date_src
+	padding: 0px 22px
+
+#app.upload-att
+	margin-top: 16px
+
+#ops
+	padding: 8px 20px
+	background: white
+#ops.pinned
+	position: fixed
+	bottom: 4px
+#frm-body
+	padding: 8px 20px
+	border-radius: 3px
+
+/*=====================upload==*/
