@@ -35,4 +35,7 @@ class test extends Controller
 		Log::info($arr);
 	    return $arr[0]->id;
     }
+    public function getGeoname(){
+    	return view('layouts.testPlace');
+    }
 }

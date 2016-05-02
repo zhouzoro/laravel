@@ -1,0 +1,7 @@
+.travelogue img {
+  width: 100%;
+  max-width: 100%;
+  max-height: 540px;
+  margin: auto;
+  object-fit: scale-down;
+}

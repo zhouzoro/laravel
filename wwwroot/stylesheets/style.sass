@@ -1,0 +1,728 @@
+@charset "utf-8"
+
+$font-stack: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, “Microsoft YaHei”, “微软雅黑”, SimSun, “宋体”, Heiti, “黑体”, sans-serif
+$prim-color: #C90
+$header-height: 96px
+$html-bg: #F4F2F0
+$bg-color:#73216D
+$carousel-height: 624px
+$carousel-height-medi: 424px
+$carousel-height-min: 289px
+$post-hero-height-max: 524px
+$post-hero-height: 464px
+$nav-height: 81px
+$bg-dark: #2C3E50
+//$bg: #01acce
+$bg: #5EE4BE
+$bg-blur: rgba(255, 255, 255,0.9)
+$light-border: 1px solid lightgray
+html,body,h1, h2, h3, h4, h5,a,button,label,.button,a,label,span
+	font-family: $font-stack
+a
+	color: $bg
+	cursor: pointer
+
+::selection
+	color: white
+	background: $bg
+
+input::selection
+	color: white
+	background: $bg
+
+header
+	border-bottom: 1px solid $bg
+
+.container-fluid
+	padding: 0px
+
+.no-boundry
+	padding: 0px
+
+.border-left
+	border-left: $light-border 
+.border-top
+	border-top: $light-border 
+.cursor-pointer
+	cursor: pointer
+
+.ui.sidebar.left.vertical.menu
+	.logo
+		position: relative
+		height: $nav-height
+		bottom: 0px
+		font-size: 54px
+		font-family: "Matura MT Script Capitals", "Algerian"
+		img
+			top: 0px
+			padding-top: 0px
+			height: $nav-height
+	.menu
+		color: white
+		z-index: 9999
+		.menu-item
+			overflow: hidden
+			opacity: 0.8
+			a.item
+				width: 100%
+				color: $bg
+				display: block
+				padding: 12px 16px 8px 12px
+				font-size: 20px
+				border-bottom: 1px solid gray
+			.sub-menu
+				margin-left: 16px
+				background: white
+				overflow: hidden
+				transition: all 0.5s ease
+				a.item-sub
+					color: $bg
+					display: block
+					padding: 8px 8px 8px 12px
+					border-bottom: 1px solid lightgray
+					font-size: 16px
+				a.item-sub:last-child
+					border-color: transparent
+#nav
+	height: $nav-height
+	width: 100%
+	z-index: 2
+	background: $bg-blur
+	color: white
+	div
+		display: inline-block
+	#sidebar-toggle
+		font-size: 20px
+		cursor: pointer
+		display: none
+	.logo
+		position: relative
+		height: $nav-height
+		bottom: 0px
+		font-size: 54px
+		font-family: "Matura MT Script Capitals", "Algerian"
+		img
+			top: 0px
+			padding-top: 0px
+			height: $nav-height
+	.menu
+		position: absolute
+		top: 44px
+		color: white
+		z-index: 9999
+		.menu-item
+			overflow: hidden
+			opacity: 0.8
+			a.item
+				width: 100%
+				color: black
+				display: block
+				padding: 8px 16px 8px 16px
+				font-size: 20px
+			a.item:hover
+				background: $bg
+				color: white
+			.sub-menu
+				position: absolute
+				background: white
+				top: 36px
+				overflow: hidden
+				height: 0px
+				transition: all 0.5s ease
+				a.item-sub
+					color: $bg
+					display: block
+					margin: 2px 8px 4px 8px
+					padding: 4px 8px 6px 12px
+					border-bottom: 1px solid lightgray
+					font-size: 16px
+				a.item-sub:last-child
+					border-color: transparent
+				a.item-sub:hover
+					background: $bg
+					color: white
+		.menu-item:hover
+			opacity: 1
+			a.item
+				background: $bg
+				color: white
+			.sub-menu
+				height: auto
+				box-shadow: 0px 0px 2px 0px $bg
+	.header-right
+		float: right
+		padding: 42px 12px 0px 12px
+		.login-ops
+			div
+				display: inline-block
+			a
+				display: inline-block
+				padding: 4px
+				border-left: 1px solid lightgray
+			a:first-child
+				border-color: transparent
+			.out-links
+				display: inline-block
+				padding: 2px 8px 2px 8px
+				.out-link
+					color: $bg
+					border: 1px solid
+					width: 32px
+					height: 32px
+					padding-top: 6px
+					padding-left: 8px
+					margin: 2px
+					border-radius: 32px
+					i
+						color: $bg
+	.user-ops
+		.user-button
+			width: 48px
+			height: 48px
+			border-radius: 24px
+			background: $bg
+			transform: translateY(-12px)
+			img
+				width: 100%
+				height: 100%
+				object-fit: cover
+		.user-ops-popup
+			width: 160px
+			.popup-content
+				padding: 8px 0px
+				.username
+					font-size: 1.2rem
+					padding: 6px 4px
+				.divider
+					padding: 4px 0px
+					width: 100%
+					a
+						padding: 2px 4px
+						display: block
+
+.card-split
+	background: white
+	margin: 24px 2px 24px 2px
+#search-home
+	position: relative
+	width: 100%
+	top: -144px
+	height: 100px
+	//padding: 0px 329px 0px 329px
+	text-align: center
+	.search-container
+		margin: 4px
+		padding: 24px 24px 24px 24px
+		border-radius: 5px
+		background: rgba(44,44,44,0.6)
+		//border: 1px solid lightgray
+		box-shadow: 0px 0px 12px -6px rgba(199,199,199,0.8)
+		//background: $bg-blur
+		.selections.ui.form
+			.inline.fields
+				.field
+					display: inline-block
+					.ui.radio.checkbox
+						label
+							color: white
+		.search-bar
+			.ui.category.search
+				width: 100%
+			.ui.icon.input
+				width: 100%
+				i
+					cursor: pointer
+		.search-submit
+			display: none
+#carousel-home
+	z-index: 1
+	position: relative
+	margin-bottom: 16px
+	height: $carousel-height
+	width: 100%
+	overflow: hidden
+	.carousel-fade
+		.carousel-inner
+			.item
+				transition-property: opacity
+				transition-duration: 1.5s
+				img
+					width: 100%
+					height: $carousel-height
+					object-fit: cover
+				.carousel-caption
+					width: 100%
+					//left: 128px
+					position: absolute
+					top: 24px
+					text-align: left
+			.item,
+			.active.left,
+			.active.right
+				opacity: 0
+				transition-timing-function: ease-in-out
+			.active,
+			.next.left,
+			.prev.right
+				opacity: 1
+			.next,
+			.prev,
+			.active.left,
+			.active.right
+				left: 0
+				transform: translate3d(0, 0, 0)
+	#carousel-thumbnail
+		position: absolute
+		right: 0px
+		top: -4px
+		width: 256px
+		padding-top: 28px
+		padding-bottom: 128px
+		margin-right: 48px
+		overflow: hidden
+		background: rgba(44,44,44,0.6)
+		border: 1px solid lightgray
+		.thumbnail
+			width: 100%
+			height: 128px
+			padding: 0px
+			border: none
+			box-shadow: 0px 0px 24px -12px rgba(44,44,44,0.6)
+			background: $bg
+			cursor: pointer
+			//transition: all 0.4s ease-out
+			img
+				width: 100%
+				height: 100%
+				object-fit: cover
+		.active.thumbnail
+			padding: 2px
+		.thumbnail:hover
+			padding: 2px
+#content-side
+	padding: 0px
+	.side-poster
+		height: 324px
+		width: 100%
+
+.content-side-right.col-xs-12.col-sm-4.col-md-4.col-lg-4
+	display: none
+
+//==IfoCenter=============================//
+.info-center
+	margin: 24px 0px
+	.title,.title-container,.service-menu,.content-container
+		width: 100%
+		text-align: center
+	.title
+		padding-bottom: 24px
+	.service-menu
+		height: 34px
+		border-bottom: $light-border
+		.item
+			border-top: 2px solid $bg
+			position: relative
+			padding: 10px 16px
+			font-size: 16px
+			color: black
+			cursor: pointer
+		.item:hover
+			background: $bg
+			color: white
+	.info-content-container
+		overflow: hidden
+		height: 221px
+		width: 100%
+		.info-content-list
+			width: 100%
+			.info-content
+				width: 100%
+				padding: 8px
+				.item-container
+					display: inline-block
+					width: 33%
+					padding: 8px
+					a.item
+						height: 189px
+						overflow: hidden
+						.img-container,.title-container
+							width: 100%
+						.img-container
+							height: 189px
+							overflow: hidden
+							img
+								width: 100%
+								height: 100%
+								object-fit: cover
+								transition: all 0.6s ease
+						.title-container
+							height: 34px
+							position: relative
+							top: -34px
+							padding: 4px
+							background: $bg
+							label.title
+								font-size: 20px
+								color: white
+								margin: auto
+					a.item:hover
+						img
+							width: 110%
+							height: 110%
+							transform: translateX(-5%) translateY(-5%)
+						.title-container
+							opacity: 0.6
+
+
+#report
+	border: $light-border
+	overflow: hidden
+
+	.report-poster
+		height: 289px
+		overflow: hidden
+		padding-bottom: 8px
+		div:first-child
+			padding: 0px
+		.poster-img
+			display: inline-block
+			position: relative
+			top: 4px
+			padding: 12px 0px 4px 0px
+			width: 100%
+			overflow: hidden
+			img
+				width: 100%
+				height: 248px
+				object-fit: cover
+		.intro
+			padding-left: 5%
+			width: 100%
+			display: inline-block
+			position: relative
+			top: 4px
+	.report-compo
+		padding: 8px
+		.item
+			padding: 4px
+			border-bottom: $light-border
+			height: 108px
+			.img-container
+				width: 33%
+				height: 1px
+				display: inline-block
+				img
+					width: 100%
+					height: 100px
+					object-fit: cover
+			.title
+				margin-left: 5%
+				width: 60%
+				height: 1px
+				display: inline-block
+	.report-compo.report-intro
+		.report-container-mini
+			height: 216px
+			overflow: hidden
+			border: $light-border
+			.report-intro-list
+				transition: all 0.6s ease
+		a.report-intro-list-nav
+			padding: 1px 12px
+			height: 24px
+			text-align: center
+			background: $bg
+			color: white
+			border: 1px solid
+			cursor: pointer
+			i
+				font-size: 16px
+		a.report-intro-list-nav:hover
+			background: white
+			color: $bg
+#articles-container
+	padding-left: 6px
+	margin-left: 8px
+	margin-top: 8px
+	border-left: $light-border
+	#articles-menu
+		padding: 8px 0px 4px 0px
+		border-bottom: $light-border
+		height: 54px
+		a.item
+			font-size: 16px
+			display: inline-block
+			padding: 12px 16px 8px 12px
+			color: black
+		.new-article
+			float: right
+			font-size: 16px
+			padding-top: 4px
+.article-cover
+	width: 100%
+	height: 256px
+	overflow: hidden
+	img
+		width: 100%
+		height: 100%
+		object-fit: cover
+#articles-list
+	.article-preview
+		width: 100%
+		margin: 8px 0px 0px 4px
+		padding: 4px 0px 24px 0px
+		border-bottom: 1px solid lightgray
+		.article-author
+			a,label
+				position: relative
+				bottom: 8px
+			.user-pic
+				display: inline-block
+				border-radius: 32px
+				overflow: hidden
+				i
+					font-size: 32px
+					position: absolute
+					left: 24px
+		
+		.article-description
+			p
+				font-style: italic
+		.article-meta
+			div
+				display: inline-block
+			a
+				padding: 2px 16px 8px 2px
+				i
+					padding: 2px
+	.article-preview.style1
+	.article-preview.style2
+		.cover-contaner
+			padding: 0px
+			.article-cover
+				height: 196px
+		//.txt-container
+			padding: 24px 12px
+
+footer
+	background: white
+	border-top: 1px solid $bg
+	margin-top: 12px
+	min-height: 128px
+	text-align: center
+	color: black
+	.footer-sub-container 
+		padding: 12px
+		.footer-sub
+			min-height: 128px
+			border-left: 1px solid $bg
+
+	.footer-sub-container:first-child
+		.footer-sub
+			border-left: none
+	div
+		padding-top: 24px
+		text-align: center
+	a
+		color: black
+		padding: 2px 8px
+	a:hover
+		color: black
+		border-bottom: 1px solid
+	a.share-link
+		font-size: 24px
+@media(max-width:768px)
+	footer
+		.footer-sub-container 
+			.footer-sub
+				min-height: 48px
+				border-top: 1px solid $bg
+				border-left: none
+
+		.footer-sub-container:first-child
+			.footer-sub
+				border-top: none
+				border-left: none
+
+#news.side-poster
+	ul
+		li
+			padding: 4px 2px
+			a:hover
+				border-bottom: 1px solid
+img.user-pic.circle
+	width: 64px
+	height: 64px
+	border-radius: 50%
+	object-fit: cover
+img.user-pic.small.circle
+	width: 32px
+	height: 32px
+
+.news-style
+	height: 289px
+	padding: 0px 1px
+	overflow: hidden
+	img.background.image
+		width: 100%
+		height: 289px
+		transition: all 0.4s ease-out
+		object-fit: cover
+		border: 2px solid #32ACB7
+	.content
+		color: white
+		background: rgba(0,0,0,0.2)
+		position: relative
+		top: -289px
+		width: 100%
+		padding: 24px
+		padding-top: 200px
+		height: 289px
+		overflow: hidden
+		transition: all 0.3s ease-out
+		div
+			transition: all 0.4s ease-out
+		.header
+			display: inline-block
+			font-size: 18px
+			height: 54px
+			overflow: hidden
+		.meta
+			font-size: 12px
+			margin-bottom: 36px
+		.description
+			font-size: 12px
+			height: 88px
+			margin-bottom: 24px
+			overflow: hidden
+
+.news-style:hover .background.image
+	border: 8px solid #32ACB7
+.news-style:hover .content
+	padding-top: 64px
+	background: rgba(0,0,0,0.4)
+.news-style:hover .meta
+	margin-bottom: 12px
+.news-style:hover .description
+	margin-bottom: 4px
+
+.arrow
+	padding: 4px
+	height: 24px
+	background: rgba(0,0,0,0.5)
+	opacity: 0.6
+	cursor: pointer
+	div
+		display: inline-block
+	.stick
+		width: 28px
+		height: 1px
+		position: relative
+		top: -5px
+		background: white
+	.point
+		width: 12px
+		height: 12px
+		margin-top: 6px
+		position: relative
+		left: -12px
+		border-top: 1px solid white
+		border-left: 1px solid white
+		transform: rotate(135deg)
+	.wall
+		color: white
+		font-size: 10px
+		width: 2px
+		height: 17px
+		position: relative
+		left: -8px
+		top: 3px
+		border-left: 1px solid white
+.arrow:hover
+	opacity: 1
+
+@media(max-width:768px)
+	#carousel-thumbnail
+		display: none
+	.login-container
+		text-align: center
+	#carousel-home
+		height: $carousel-height-min
+		.carousel-fade
+			.carousel-inner
+				.item
+					img
+						height: $carousel-height-min
+				.carousel-caption
+					h2 
+						font-size: 20px
+	.article-cover
+		height: 189px
+	#nav
+		.menu
+			display: none
+	.content-side-left.col-xs-12.col-sm-4.col-md-4.col-lg-4
+		display: none
+	.content-side-right.col-xs-12.col-sm-4.col-md-4.col-lg-4
+		display: block		
+	.post-hero
+		height: $carousel-height-min
+
+
+
+form.user-access
+	width: 324px
+	margin: auto
+	p.tip-message
+		margin-top: 144px
+		padding: 12px 24px
+		border-radius: 4px
+	.ui.input
+		display: block
+		margin: 16px
+		input
+			width: 289px
+	.user-access-btn
+		display: inline-block
+		margin-left: 24px
+
+@media(max-width:1366px)
+	#carousel-home
+		height: $carousel-height-medi
+		.carousel-fade
+			.carousel-inner
+				.item
+					img
+						height: $carousel-height-medi
+		#carousel-thumbnail
+			width: 168px
+			.thumbnail
+				width: 100%
+				height: 82px
+
+@media(max-width:999px)
+	#nav
+		.login-container
+			padding-top: 2px
+
+	#carousel-home
+		height: $carousel-height-medi
+		.carousel-fade
+			.carousel-inner
+				.item
+					img
+						height: $carousel-height-medi
+		#carousel-thumbnail
+			width: 168px
+			.thumbnail
+				width: 100%
+				height: 82px
+
+@media(max-width:768px)
+	#nav
+		#sidebar-toggle
+			display: inline-block
+		.menu
+			display: none
+		.login-container
+			padding-top: 42px

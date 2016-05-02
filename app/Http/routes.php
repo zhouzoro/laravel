@@ -11,6 +11,7 @@
 |
 */
 use Illuminate\Http\Request;
+
 Route::get('/', function () {
     return view('layouts.index');
 });
@@ -18,29 +19,44 @@ Route::get('/', function () {
 Route::resource('cruiser_report','CruiserReportController');
 
 Route::post('/upload/file',function(Request $request){
-	saveFile($request->file('file'),'file');
-	saveFile($request->file('image'),'image');
+	saveFile($request->file('file'),'files');
+	saveFile($request->file('image'),'images');
 
     });
 
-Route::get('/upload/file',function(){
+Route::get('/upload/files',function(){
     	return view('upload_test');
     });
 
-Route::get('/new_post',function(){
-    	return view('layouts.newPost');
+Route::get('/login',function(){
+    	return view('layouts.loginPage');
     });
+Route::get('/signup',function(){
+    	return view('layouts.signupPage');
+    });
+
+Route::post('/login',function(Request $request){
+    	$user = App\User::where('email',$request->input('email'))->first();
+    	return $user->email;
+    });
+
+Route::post('/signup',function(Request $request){
+	$newUser = new App\User;
+	$newUser->email = $request->input('email');
+	$newUser->username = $request->input('email');
+	$newUser->password = $request->input('password');
+	$newUser->save();
+	$user = App\User::where('email',$newUser->email)->first();
+	return response()->json(['status' => '200 OK','id' => $user->id,'username' => $user->username]);
+});
+
+Route::post('/upload/images','UploadController@postImg');
+
+Route::get('/new_post',function(){
+	return view('layouts.newPost');
+});
+
 Route::controller('user','UserController');
 
 Route::controller('test','test');
 //Route::controller('upload','UploadController');
-
-function saveFile($file, $ftype){
-	if($file){
-		$dpath = base_path('wwwroot/' . $ftype . 's');
-		Log::info($dpath);
-		$extension = $file->getClientOriginalExtension(); // getting image extension
-		$fileName = rand(111111,999999).'.'.$extension;
-	    return	$file->move($dpath,$fileName);
-	}
-}

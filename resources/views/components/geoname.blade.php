@@ -1,0 +1,1 @@
+<input type="text" class="geosearch"/><ul class="result"></ul>

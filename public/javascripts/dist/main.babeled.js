@@ -175,7 +175,7 @@ function initMce(selector, docId) {
         //plugins: "contextmenu",
         //contextmenu: "formatselect bold italic link image inserttable | cell row column deletetable",
         menubar: false,
-        images_upload_url: '/images',
+        images_upload_url: '/upload/images',
         statusbar: false,
         min_height: 480
     });

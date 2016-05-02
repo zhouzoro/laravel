@@ -6,10 +6,10 @@ $header-height: 96px
 $html-bg: #F4F2F0
 $bg-color:#73216D
 $carousel-height: 624px
-$carousel-height-min: 248px
+$carousel-height-min: 289px
 $nav-height: 81px
 $bg-dark: #2C3E50
-$bg: #3FBAC2
+$bg: #01acce
 $bg-blur: rgba(255, 255, 255,0.9)
 $light-border: 1px solid lightgray
 
@@ -101,10 +101,13 @@ header
 			opacity: 0.8
 			a.item
 				width: 100%
-				color: $bg
+				color: black
 				display: block
-				margin: 8px 16px 8px 16px
+				padding: 8px 16px 8px 16px
 				font-size: 20px
+			a.item:hover
+				background: $bg
+				color: white
 			.sub-menu
 				position: absolute
 				background: white
@@ -121,6 +124,9 @@ header
 					font-size: 16px
 				a.item-sub:last-child
 					border-color: transparent
+				a.item-sub:hover
+					background: $bg
+					color: white
 		.menu-item:hover
 			opacity: 1
 			.sub-menu
@@ -277,11 +283,11 @@ header
 .info-center
 	border: $light-border
 	margin: 24px 0px
-	div
-		border: $light-border
 	.title,.title-container,.service-menu,.content-container
 		width: 100%
 		text-align: center
+	.title
+		padding: 12px
 	.service-menu
 		height: 34px
 		.item
@@ -295,6 +301,7 @@ header
 			border-bottom: 2px solid $bg
 			padding: 8px 12px
 	.info-content-container
+		border: $light-border
 		overflow: hidden
 		height: 221px
 		width: 100%
@@ -523,6 +530,7 @@ img.user-pic.circle
 img.user-pic.small.circle
 	width: 32px
 	height: 32px
+
 .news-style
 	height: 289px
 	padding: 0px 1px
@@ -628,7 +636,9 @@ img.user-pic.small.circle
 	.content-side-left.col-xs-12.col-sm-4.col-md-4.col-lg-4
 		display: none
 	.content-side-right.col-xs-12.col-sm-4.col-md-4.col-lg-4
-		display: block
+		display: block		
+	.post-hero
+		height: $carousel-height-min
 
 /*==upload=====================*/
 
@@ -649,7 +659,6 @@ img.user-pic.small.circle
 		font-size: 24px
 		line-height: 150%
 		width: 100%
-		text-align: center
 
 #date_src
 	padding: 0px 22px
@@ -666,5 +675,21 @@ img.user-pic.small.circle
 #frm-body
 	padding: 8px 20px
 	border-radius: 3px
+#frm
+	position: relative
+	top: -64px
+	
+.post-hero
+	width: 100%
+	height: $carousel-height
+	text-align: center
+	a.hero-btn
+		border: 2px solid $bg
+		color: $bg
+		margin: auto
+	a.hero-btn:hover
+		background: $bg
+		border: 2px solid white
+		color: white
 
 /*=====================upload==*/

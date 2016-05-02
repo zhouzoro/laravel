@@ -5,9 +5,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--meta(name='renderer' content='webkit')-->
-        <!--meta(http-equiv="X-UA-Compatible" content="IE=10")-->
+        <meta(http-equiv="X-UA-Compatible" content="IE=10")>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"-->
+        <meta property="qc:admins" content="1455576553251356375" />
         <link rel="stylesheet" href="/stylesheets/dist/bootstrap-grid.min.css">
         <link rel="stylesheet" href="/stylesheets/dist/font-awesome.min.css">
         <!--link rel="stylesheet" href="/semantic/semantic.min.css"-->
@@ -21,7 +21,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     </head>
     <body>
-        <div id="sidebar-hidden" class='ui left inline vertical sidebar menu'>
+        <div id="menu-hidden" class='ui left inline vertical sidebar menu hidden'>
             @include('layouts.mainMenu')
         </div>
         <div class='pusher'>
@@ -32,8 +32,10 @@
             @section('main')
             @show
 
-            @include('layouts.footer')
         </div>
+        @section('footer')
+            @include('layouts.footer')
+        @show
 
         @section('common-scripts')
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>

@@ -150,7 +150,7 @@ function initMce(selector, docId) {
         selector: selector,
         skin: 'mxc1',
         language: 'zh_CN',
-        //content_css: '/stylesheets/mce.min.css',
+        content_css: '/stylesheets/travelogue.min.css',
         //inline: inline,
         plugins: 'table autoresize paste image imagetools preview',
         /*style_formats: [{ title: 'H1', block: 'h1' }, { title: 'H2', block: 'h2' }, { title: 'H3', block: 'h3' }, { title: 'Bold text', inline: 'strong' }, { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } }, { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } }, { title: 'Badge', inline: 'span', styles: { display: 'inline-block', border: '1px solid #2276d2', 'border-radius': '5px', padding: '2px 5px', margin: '0 2px', color: '#2276d2' } }, { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }],
@@ -175,8 +175,9 @@ function initMce(selector, docId) {
         //plugins: "contextmenu",
         //contextmenu: "formatselect bold italic link image inserttable | cell row column deletetable",
         menubar: false,
-        images_upload_url: '/images',
+        images_upload_url: '/upload/images',
         statusbar: false,
+        body_class: 'travelogue',
         min_height: 480
     });
 }
