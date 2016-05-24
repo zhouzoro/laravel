@@ -1,0 +1,15 @@
+#new-campus
+	form
+		{{ csrf_field() }}
+		input.hidden(name='cover' type='text' value!='{{$post->as}}')
+		.cover
+			a.edit-cover
+				i.fa.fa-picture-o
+				i.fa.fa-plus-circle
+		.basic-info
+			.ui.input
+				input(name='title' type='text')
+			.ui.input
+				input(name='startDate' type='date')
+			.ui.input
+				input(name='endDate' type='date')
