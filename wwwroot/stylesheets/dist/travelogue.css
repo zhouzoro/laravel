@@ -1,7 +1,39 @@
+@charset "UTF-8";
+html, body, h1, h2, h3, h4, h5, a, button, label, .button, a, label, span {
+  font-family: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, “Microsoft YaHei”, “微软雅黑”, SimSun, “宋体”, Heiti, “黑体”, sans-serif;
+}
+
 .travelogue img {
   width: 100%;
   max-width: 100%;
   max-height: 540px;
   margin: auto;
   object-fit: scale-down;
+}
+
+.post-hero {
+  height: 432px;
+  padding: 144px 24px 24px 8px;
+  background-size: cover;
+}
+.post-hero #post-title {
+  padding: 24px;
+}
+.post-hero #post-title span {
+  padding: 2px;
+  background: #5EE4BE;
+  color: white;
+}
+.post-hero .user-link {
+  padding: 0px 24px;
+}
+
+blockquote {
+  margin: 16px;
+  padding: 8px;
+  border-left: 3px solid lightgray;
+  font-style: italic;
+}
+blockquote p {
+  margin: 4px;
 }

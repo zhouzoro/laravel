@@ -25,12 +25,10 @@
                 </div>
 
                 <a class="login" href='/login'>登录</a>
-                <span>|</span>
-                <a class="signup" href='/signup'>注册</a>
 
             </div>
 
-            <div class="user-ops">
+            <div class="user-ops hidden">
                 <div class="user-button ui button data-position='bottom center'">
                     <img src="/images/user/007.jpg" />
                 </div>
@@ -38,7 +36,7 @@
                     <div class="popup-content">
                         <label class='username'>User007</label>
                         <div class="divider border-top"><a href="">View Profile</a></div>
-                        <div class="divider border-top"><a href="">Settings</a><a href="#" class='logout'>Log out</a></div>
+                        <div class="divider border-top"><a href="">Settings</a><a href="#" class='logout' onclick='logOut()'>Log out</a></div>
                     </div>
                 </div>
             </div>

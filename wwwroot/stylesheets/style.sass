@@ -1,12 +1,18 @@
 @charset "utf-8"
-
 $font-stack: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, “Microsoft YaHei”, “微软雅黑”, SimSun, “宋体”, Heiti, “黑体”, sans-serif
 $prim-color: #C90
 $header-height: 96px
 $html-bg: #F4F2F0
 $bg-color:#73216D
-$carousel-height: 624px
-$carousel-height-medi: 424px
+$carousel-height: 492px
+$carousel-thumb-width: 224px
+$carousel-thumb-height: 112px
+$carousel-height-medi: 436px
+$carousel-thumb-width-medi: 184px
+$carousel-thumb-height-medi: 100px
+$carousel-height-min: 324px
+$carousel-thumb-width-min: 144px
+$carousel-thumb-height-min: 75px
 $carousel-height-min: 289px
 $post-hero-height-max: 524px
 $post-hero-height: 464px
@@ -16,6 +22,8 @@ $bg-dark: #2C3E50
 $bg: #5EE4BE
 $bg-blur: rgba(255, 255, 255,0.9)
 $light-border: 1px solid lightgray
+
+
 html,body,h1, h2, h3, h4, h5,a,button,label,.button,a,label,span
 	font-family: $font-stack
 a
@@ -29,7 +37,8 @@ a
 input::selection
 	color: white
 	background: $bg
-
+.pusher
+	min-height: calc(100% - 128px)
 header
 	border-bottom: 1px solid $bg
 
@@ -151,7 +160,7 @@ header
 				box-shadow: 0px 0px 2px 0px $bg
 	.header-right
 		float: right
-		padding: 42px 12px 0px 12px
+		padding: 24px 12px 0px 12px
 		.login-ops
 			div
 				display: inline-block
@@ -177,15 +186,22 @@ header
 						color: $bg
 	.user-ops
 		.user-button
-			width: 48px
-			height: 48px
-			border-radius: 24px
+			width: 40px
+			height: 40px
+			border-radius: 20px
+			padding: 0px
+			overflow: hidden
 			background: $bg
-			transform: translateY(-12px)
+			transform: translateY(4px)
+			border: 1px solid $bg
+			transition: all 0.2s ease-out
 			img
 				width: 100%
 				height: 100%
 				object-fit: cover
+		.user-button:hover
+			box-shadow: 0px 0px 8px 2px $bg
+			//transform: scale(1.08)
 		.user-ops-popup
 			width: 160px
 			.popup-content
@@ -250,12 +266,29 @@ header
 					width: 100%
 					height: $carousel-height
 					object-fit: cover
+					transition: transform 6.0s ease-in-out
+					transition-delay: 1s
+					transform: scale(1.0)
 				.carousel-caption
 					width: 100%
 					//left: 128px
 					position: absolute
 					top: 24px
 					text-align: left
+					h2
+						a
+							color: white
+						a:hover
+							color: $bg
+			.item:nth-child(2n)
+				img
+					transform: scale(1.1)
+			.item:nth-child(2n).active
+				img
+					transform: scale(1.0)
+			.item.active
+				img
+					transform: scale(1.1)
 			.item,
 			.active.left,
 			.active.right
@@ -271,34 +304,49 @@ header
 			.active.right
 				left: 0
 				transform: translate3d(0, 0, 0)
-	#carousel-thumbnail
+	ol#carousel-thumb.carousel-indicators
 		position: absolute
 		right: 0px
-		top: -4px
-		width: 256px
-		padding-top: 28px
-		padding-bottom: 128px
+		left: auto
+		top: 0px
+		bottom: 0px
+		width: 224px
+		padding-top: 10px
+		padding-bottom: 12px
 		margin-right: 48px
-		overflow: hidden
+		margin-bottom: 0px
+		//overflow: hidden
 		background: rgba(44,44,44,0.6)
 		border: 1px solid lightgray
-		.thumbnail
+		z-index: 2
+		li.thumb
+			display: block
+			position: relative
 			width: 100%
-			height: 128px
+			height: $carousel-thumb-height
 			padding: 0px
+			margin-bottom: 8px
 			border: none
+			border-radius: 0px
 			box-shadow: 0px 0px 24px -12px rgba(44,44,44,0.6)
 			background: $bg
+			background-size: cover
 			cursor: pointer
-			//transition: all 0.4s ease-out
+			transition: all 0.2s ease-out
 			img
 				width: 100%
 				height: 100%
 				object-fit: cover
-		.active.thumbnail
+				position: relative
+				left: auto
+				right: 0px
+		.thumb.active
+			transform: scale(1.05)
+			box-shadow: 0px 0px 8px 0px white
+		.thumb:hover
 			padding: 2px
-		.thumbnail:hover
-			padding: 2px
+			transform: scale(1.1)
+			box-shadow: 0px 0px 16px 0px white
 #content-side
 	padding: 0px
 	.side-poster
@@ -373,7 +421,6 @@ header
 						.title-container
 							opacity: 0.6
 
-
 #report
 	border: $light-border
 	overflow: hidden
@@ -440,12 +487,13 @@ header
 		a.report-intro-list-nav:hover
 			background: white
 			color: $bg
+
 #articles-container
 	padding-left: 6px
 	margin-left: 8px
 	margin-top: 8px
 	border-left: $light-border
-	#articles-menu
+	.articles-menu
 		padding: 8px 0px 4px 0px
 		border-bottom: $light-border
 		height: 54px
@@ -453,7 +501,9 @@ header
 			font-size: 16px
 			display: inline-block
 			padding: 12px 16px 8px 12px
-			color: black
+			color: $bg
+		a.item:hover
+			opacity: 0.7
 		.new-article
 			float: right
 			font-size: 16px
@@ -466,29 +516,34 @@ header
 		width: 100%
 		height: 100%
 		object-fit: cover
+
 #articles-list
 	.article-preview
 		width: 100%
 		margin: 8px 0px 0px 4px
-		padding: 4px 0px 24px 0px
+		padding: 8px 0px 4px 0px
 		border-bottom: 1px solid lightgray
+		.article-title
+			padding-bottom: 8px 
 		.article-author
-			a,label
-				position: relative
-				bottom: 8px
-			.user-pic
-				display: inline-block
-				border-radius: 32px
-				overflow: hidden
-				i
-					font-size: 32px
-					position: absolute
-					left: 24px
-		
+			a.user-link
+				img.user-pic
+					width: 32px
+					height: 32px
+					border-radius: 16px
+					object-fit: cover
+					background: $bg
+				span
+					padding: 0px 4px
+		.article-tags
+			display: none
+			a
+				padding-right: 16px
 		.article-description
 			p
 				font-style: italic
 		.article-meta
+			padding-top: 8px
 			div
 				display: inline-block
 			a
@@ -505,12 +560,11 @@ header
 			padding: 24px 12px
 
 footer
-	background: white
+	background: $bg-dark
 	border-top: 1px solid $bg
-	margin-top: 12px
 	min-height: 128px
 	text-align: center
-	color: black
+	color: silver
 	.footer-sub-container 
 		padding: 12px
 		.footer-sub
@@ -524,10 +578,10 @@ footer
 		padding-top: 24px
 		text-align: center
 	a
-		color: black
+		color: silver
 		padding: 2px 8px
 	a:hover
-		color: black
+		color: silver
 		border-bottom: 1px solid
 	a.share-link
 		font-size: 24px
@@ -640,9 +694,37 @@ img.user-pic.small.circle
 		border-left: 1px solid white
 .arrow:hover
 	opacity: 1
+.ui.input.signup-only
+	transition: all 0.4s ease-in-out
+
+
+/*campus-related**/
+#cruise-campus-prevs
+	//position: absolute
+	top: $nav-height
+	width: 100%
+	.item
+		//position: absolute
+		width: 100%
+		//height: 100%
+		height: $carousel-height-medi
+		background-size: cover
+		.caption
+			padding-top: 124px
+			text-align: center
+			.title
+			label.meta
+			a.link-more
+				padding: 4px 12px
+				color: $bg
+				border: 2px solid $bg
+			a.link-more:hover
+				color: white
+				border: 2px solid white
+				background: $bg
 
 @media(max-width:768px)
-	#carousel-thumbnail
+	ol#carousel-thumb.carousel-indicators
 		display: none
 	.login-container
 		text-align: center
@@ -694,11 +776,12 @@ form.user-access
 				.item
 					img
 						height: $carousel-height-medi
-		#carousel-thumbnail
-			width: 168px
-			.thumbnail
+		ol#carousel-thumb.carousel-indicators
+			width: $carousel-thumb-width-medi
+			li.thumb
 				width: 100%
-				height: 82px
+				height: $carousel-thumb-height-medi
+				margin-bottom: 	6px
 
 @media(max-width:999px)
 	#nav
@@ -712,9 +795,9 @@ form.user-access
 				.item
 					img
 						height: $carousel-height-medi
-		#carousel-thumbnail
+		ol#carousel-thumb.carousel-indicators
 			width: 168px
-			.thumbnail
+			li.thumb
 				width: 100%
 				height: 82px
 

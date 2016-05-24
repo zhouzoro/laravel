@@ -12,22 +12,57 @@
 */
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    return view('layouts.index');
-});
 
-Route::resource('cruiser_report','CruiserReportController');
+//==tests=====================//
 
-Route::post('/upload/file',function(Request $request){
-	saveFile($request->file('file'),'files');
-	saveFile($request->file('image'),'images');
+Route::controller('test','test');
 
-    });
+//Route::controller('upload','UploadController');
+
+Route::controller('user','UserController');
 
 Route::get('/upload/files',function(){
-    	return view('upload_test');
+        return view('upload_test');
     });
 
+//Route::resource('cruiser_report','CruiserReportController');
+
+//==pages=====================//
+Route::get('/', function () {
+	$posts = DB::table('cruiser_reports')
+                ->join('users', function ($join){
+                        $join->on('users.id', '=', 'cruiser_reports.author');
+                })
+                ->select('cruiser_reports.*','users.username as author_name')
+                ->orderBy('updated_at', 'desc')
+                ->skip(0)
+                ->take(4)
+                ->get();
+    return view('layouts.index',['carouselItems' => $posts]);
+});
+
+
+
+Route::get('/images/user/{picname}',function($picname){
+        if(!File::exists(base_path('wwwroot/images/user/' . $picname))){
+        	return response()->file(base_path('wwwroot/images/user/007.jpg'));
+        }
+    });
+
+Route::get('/images/user/{picname}',function($picname){
+        if(!File::exists(base_path('wwwroot/images/user/' . $picname))){
+        	return response()->file(base_path('wwwroot/images/user/007.jpg'));
+        }
+    });
+Route::get('/cruiser_reports/images/{imgname}','CruiserReportsController@redirectImages');
+//==pages=====================//
+
+//Route::get('/cruiser_report/{id}', 'CruiserReportController@getPost');
+
+Route::get('/home', function () {
+    return redirect('/');
+});
+//==users=====================//
 Route::get('/login',function(){
     	return view('layouts.loginPage');
     });
@@ -35,28 +70,16 @@ Route::get('/signup',function(){
     	return view('layouts.signupPage');
     });
 
-Route::post('/login',function(Request $request){
-    	$user = App\User::where('email',$request->input('email'))->first();
-    	return $user->email;
-    });
+Route::post('/login','UserController@login');
 
-Route::post('/signup',function(Request $request){
-	$newUser = new App\User;
-	$newUser->email = $request->input('email');
-	$newUser->username = $request->input('email');
-	$newUser->password = $request->input('password');
-	$newUser->save();
-	$user = App\User::where('email',$newUser->email)->first();
-	return response()->json(['status' => '200 OK','id' => $user->id,'username' => $user->username]);
-});
+Route::post('/signup','UserController@signup');
 
 Route::post('/upload/images','UploadController@postImg');
 
-Route::get('/new_post',function(){
-	return view('layouts.newPost');
-});
+Route::resource('user','UserController', ['except' => [
+    'index', 'create','destroy'
+]]);
 
-Route::controller('user','UserController');
+Route::resource('cruiser_reports','CruiserReportController');
 
-Route::controller('test','test');
-//Route::controller('upload','UploadController');
+Route::resource('cruise_campus','CruiseCampusController');

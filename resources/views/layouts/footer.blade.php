@@ -28,4 +28,5 @@
             </a>
         </div>
     </div>
+    <div class='bottom-indicator'></div>
 </footer>

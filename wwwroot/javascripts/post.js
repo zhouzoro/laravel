@@ -1,5 +1,9 @@
 $(document).ready(() => {
+    if (!Cookies.get('new_post')) {
+        Cookies.set('new_post', {});
+    }
     initMce('#input-body');
+    $('form#frm').find('input').change(cachePostInput);
 
     $('#btn-img').click(function() {
         var tempImgInput = $('<input>').attr({
@@ -23,6 +27,7 @@ $(document).ready(() => {
         });
         $('body').append(tempImgInput);
         tempImgInput.click();
+
     });
 
     ///////geonames
@@ -48,10 +53,60 @@ $(document).ready(() => {
     $('.geosearch').keyup(showNames).change(showNames);
 });
 
+function cachePostInput() {
+    var $input = $(this);
+    var cachedInputs = JSON.parse(Cookies.get('new_post'));
+    cachedInputs[$input.attr('name')] = $input.val();
+    Cookies.set('new_post', cachedInputs, { expires: 7 });
+}
+
+function readInputCache() {
+    var cachedInputs = JSON.parse(Cookies.get('new_post'));
+    for (let key in cachedInputs) {
+        $('input[name="' + key + '"').val(cachedInputs[key]);
+        if (key === "hero-img") {
+            $('.post-hero').css({ 'background': 'url("http://' +window.location.host+ cachedInputs[key] + '")', 'background-size': 'cover' });
+        }
+        if (key === "content") {
+            tinymce.activeEditor.setContent(cachedInputs[key]);
+        }
+
+    }
+}
+
+function removeInputCache() {
+    Cookies.remove('new_post');
+}
+
+function uploadPost() {
+    tinymce.activeEditor.uploadImages(function(success) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/cruiser_reports');
+
+        xhr.onload = function() {
+            var res = JSON.parse(xhr.responseText);
+            if (res.status == '200') {
+                removeInputCache();
+                window.location = res.url;
+            } else if (res.status == '504') {
+                showTipMsg('上传失败: ' + res.msg, 0);
+            }
+        };
+
+        var contentHtml = tinymce.activeEditor.save();
+        var quote = getQuoteText(contentHtml);
+        $('input[name=content]').val(contentHtml);
+        $('input[name=quote]').val(quote);
+        var formData = new FormData($('form#frm')[0]);
+        formData.append('username', Cookies.get('username'));
+        formData.append('email', Cookies.get('email'));
+        xhr.send(formData);
+        console.log(9)
+    });
+}
 
 function initMce(selector, docId) {
-    var inline = false;
-    if (docId) inline = true;
+    var inline = docId ? true : false;
     tinymce.init({
         selector: selector,
         skin: 'mxc1',
@@ -59,7 +114,8 @@ function initMce(selector, docId) {
         content_css: '/stylesheets/dist/travelogue.min.css',
         body_class: 'travelogue',
         //inline: inline,
-        plugins: 'table autoresize paste image imagetools preview',
+        plugins: ["autoresize", "advlist", "autolink", "lists", "link", "image", "charmap", "print", "preview", "anchor", "searchreplace", "visualblocks", "code", "fullscreen", "insertdatetime", "media", "table", "paste", "imagetools"],
+        // plugins: 'table autoresize paste image imagetools preview',
         /*style_formats: [{ title: 'H1', block: 'h1' }, { title: 'H2', block: 'h2' }, { title: 'H3', block: 'h3' }, { title: 'Bold text', inline: 'strong' }, { title: 'Red text', inline: 'span', styles: { color: '#ff0000' } }, { title: 'Red header', block: 'h1', styles: { color: '#ff0000' } }, { title: 'Badge', inline: 'span', styles: { display: 'inline-block', border: '1px solid #2276d2', 'border-radius': '5px', padding: '2px 5px', margin: '0 2px', color: '#2276d2' } }, { title: 'Table row 1', selector: 'tr', classes: 'tablerow1' }],
         formats: {
             alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'left' },
@@ -74,7 +130,7 @@ function initMce(selector, docId) {
         },*/
         //content_css: '/stylesheets/person.min.css',
         //plugins: "advlist lists link anchor contextmenu paste image autoresize preview imagetools lists",
-        toolbar: 'undo redo formatselect fontsizeselect bold italic underline strikethrough alignleft aligncenter alignright alignfull advlist lists link',
+        toolbar: 'undo redo styleselect fontsizeselect bold italic underline alignleft aligncenter alignright alignfull advlist lists link',
         image_caption: true,
         paste_data_images: true,
         //block_formats: 'Paragraph=p;Header 1=h1;Header 2=h2;Header 3=h3',
@@ -84,7 +140,17 @@ function initMce(selector, docId) {
         menubar: false,
         images_upload_url: '/upload/images',
         statusbar: false,
-        min_height: 480
+        min_height: 480,
+
+        setup: function(ed) {
+            ed.on('change', function(e) {
+                var contentHtml = ed.save();
+                $('input[name=content]').val(contentHtml).change();
+            });
+            ed.on('init', function(e) {
+                readInputCache();
+            });
+        }
     });
 }
 
@@ -183,9 +249,8 @@ function uploadHero() {
 
             fileUploadReq.onload = function() {
                 var json = JSON.parse(fileUploadReq.responseText);
-                hero.css({ 'background': 'url("' + json.location + '")', 'background-size': 'cover' });
-                $('.input-hero-img').val(json.location);
-                console.log($('.input-hero-img').val())
+                hero.css({ 'background': 'url("http://' + window.location.host + json.location + '")', 'background-size': 'cover' });
+                $('.input-hero-img').val(json.location).change();
                 //label.removeClass('pct').addClass('btn').text('change');
                 $('.temp-input').remove();
             };
@@ -202,104 +267,6 @@ function uploadHero() {
 function computProgress(oEvent) {
     var percentComplete = Math.ceil(1000 * oEvent.loaded / oEvent.total) / 10 + '%';
     return percentComplete;
-}
-
-/*function initUploadOf(type, docId) {
-    initMce('#input-body', docId);
-    if (type === 'people') {
-        console.log('uploading type of ' + type);
-        $('#btn-upload').click(function() {
-            $('#loader').modal('show');
-            var people = $('#upload-people');
-            var data = {
-                name: people.find('#input-name').val(),
-                picture: people.find('#profile-pic').find('img').attr('src'),
-                title: people.find('#input-title').val(),
-                degree: people.find('#input-degree').val(),
-                office: people.find('#input-office').val(),
-                email: people.find('#input-email').val(),
-                phone: people.find('#input-phone').val(),
-                details: tinymce.activeEditor.save()
-            };
-            if (docId) data.id = docId;
-            $.post('/add_people', data, function(res) {
-                if (docId) document.location.reload(true);
-                else window.location = res.url;
-            });
-        })
-    } else {
-        var attManager = initManeger();
-        var vue = new Vue({
-            el: '#app',
-            data: {
-                atts: []
-            },
-            methods: {
-                remove: function remove(att) {
-                    att.abort();
-                    this.atts.$remove(att);
-                }
-            }
-        });
-        $('#btn-img').click(function() {
-            var tempImgInput = $('<input>').attr({
-                'type': 'file',
-                'class': 'temp-input'
-            }).css({
-                'display': 'none',
-                'position': 'absolute'
-            }).change(function() {
-                if (this.files && this.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        tinymce.activeEditor.execCommand('insertHTML', false, '<img class="inline-img" src="' + e.target.result + '" width="80%" >');
-
-                        tinymce.activeEditor.uploadImages();
-                    };
-                    reader.readAsDataURL(this.files[0]);
-                }
-
-                $('.temp-input').remove();
-            });
-            $('body').append(tempImgInput);
-            tempImgInput.click();
-        });
-
-        $('#input-date').val(GetCurrentDate());
-        $('#btn-att').click(function() {
-            vue.atts.push(attManager.addAtt());
-        });
-        $('#btn-upload').click(function() {
-            $('#loader').modal('show');
-            var loader = $('#loader').find('.loader');
-            loader.text('uploading Images');
-            tinymce.activeEditor.uploadImages(function(success) {
-                loader.text('wrapping together');
-                var attHtml = attManager.wrapUp(vue.atts);
-                data = {
-                    title: $('#input-title').val(),
-                    date: $('#input-date').val(),
-                    source: $('#input-source').val(),
-                    cover: $(tinymce.activeEditor.save()).find('img').attr('src'),
-                    quote: getQuoteText(tinymce.activeEditor.save()),
-                    body: tinymce.activeEditor.save() + attHtml,
-                    att: attHtml
-                };
-                if (docId) data.id = docId;
-                loader.text('uploading');
-                var posturl = '/add_' + type;
-                $.post(posturl, data, function(res) {
-                    $('#loader').modal('hide');
-                    if (docId) document.location.reload(true);
-                    else window.location = res.url;
-                });
-            });
-        });
-    }
-
-}*/
-function uploadPost(){
-
 }
 
 function GetCurrentDate() {

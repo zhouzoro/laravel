@@ -9,6 +9,9 @@
 		</div>
     </div>
 @endsection
-
+@section('common-scripts')
+	<script src="/javascripts/dist/vue.min.js"></script>
+	@parent
+@endsection
 @section('footer')
 @endsection

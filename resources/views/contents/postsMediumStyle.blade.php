@@ -1,18 +1,17 @@
 <div class="article-preview style1">
     @if(isset($previewItem))
+        <!--TITLE-->
+        <h2 class="article-title" href={{'/'.$previewItem['type'].'/'.$previewItem['id']}}>{{$previewItem['title']}}</h2>
+
         <!--author info part including ship-->
         <div class="article-author">
-            <div class="user-pic">
-                <img src={{ '/images/user/'.$previewItem['userPic'] }} class="user-pic small circle">
-                <i class="fa fa-user"></i>
-            </div>
-            <a class='username' href={{'/user/'.$previewItem['authorID']}}>{{$previewItem['authorName']}}</a>
+            <a class='user-link'>
+                <img src={{ '/images/user/'.$previewItem['author'].'.jpg' }} class="user-pic small circle">
+                <span clspanss='username' href={{'/user/'.$previewItem['authorID']}}>{{$previewItem['authorName']}}</a>
+            </a>
             <label> from: </label>
             <a class="shipName" href={{'/user/'.$previewItem['shipID']}}>{{$previewItem['shipName']}}</a>
         </div>
-
-        <!--TITLE-->
-        <h2 class="article-title" href={{'/'.$previewItem['type'].'/'.$previewItem['id']}}>{{$previewItem['title']}}</h2>
 
         <!--tags-->
         <div class="article-tags">
@@ -49,11 +48,13 @@
             </div>
         </div>
     @else
-        <div class="article-author">
-            <div class="user-pic"><img src="" class="user-pic small circle"><i class="fa fa-user"></i></div><a>user 001</a>
-            <label> from: </label><a class="article-cruiser">ship 001</a></div>
         <div class="article-title">
             <h2>Nothing like this</h2></div>
+        <div class="article-author">
+            <a class='user-link'>
+                <img src="/images/user/007.jpg" class="user-pic small circle"></img><span>user 001</span>
+            </a>
+            <label> from: </label><a class="article-cruiser">ship 001</a></div>
         <div class="article-tags"><a class="tag">tag1</a><a class="tag">tag2</a><a class="tag">tag3</a></div>
         <div class="article-cover"><img src="https://placem.at/places?w=900&amp;random=0.7891012062318623"></div>
         <div class="article-description">

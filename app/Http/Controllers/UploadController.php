@@ -23,7 +23,7 @@ class UploadController extends Controller
 		if($file){
 			$dpath = base_path('wwwroot/' . $ftype);
 			$extension = $file->getClientOriginalExtension(); // getting image extension
-			$fileName = time().'_'.$file->getClientOriginalName();
+			$fileName = time().'_'.rand(0,99999).'.'.$extension;
 			$file->move($dpath,$fileName);
 		    return	'/images/'.$fileName;
 		}

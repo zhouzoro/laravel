@@ -4,7 +4,6 @@
 	<!--carousel-->
 	<div id='carousel-home'>
 		@include('contents.carousel')
-		@include('contents.carouselThumbnail')
 		@include('inputs.searchHome')
 	</div>
 	<!--main contents====================================-->

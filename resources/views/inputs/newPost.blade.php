@@ -1,4 +1,5 @@
 <form id="frm" method="post" data-type="evt" action="/tinymce" enctype="multipart/form-data">
+    {{ csrf_field() }}
     <div id="ul_title">
         <div class="title ui input">
             <input id="input-title" name="title" rows="1" autofocus="autofocus" required="required" placeholder="标题" class="title" />
@@ -13,6 +14,8 @@
         </div>
     </div>
     <div class="hidden">
+        <input class='input-content' type="text" name="content" />
+        <input class='input-quote' type="text" name="quote" />
         <input class='input-hero-img' type="text" name="hero-img" />
     </div>
 </form>

@@ -1,13 +1,14 @@
 <div id="carousel-slide" data-ride="carousel" data-pause="false" class="carousel slide carousel-fade">
+	@include('contents.carouselThumbnail')
     <div role="listbox" class="carousel-inner">
 	    @if(isset($carouselItems))
 	    	@foreach($carouselItems as $index=>$item)
-		        <div class={{$index===0?"item active":"item"}}><img src={{$item['cover']}} alt="slider image" class="slr-img cursor-pointer">
+		        <div class='{{$index == 0?"item active":"item"}}'><img src='{{$item->cover}}' alt="slider image" class="slr-img cursor-pointer">
 		            <div class="carousel-caption">
-		                <h2 href={{"/".$item['type']."/".$item['id']}}>{{$item['title']}}</h2>
+		                <h2><a href='{{"/cruiser_reports/".$item->id}}'>{{$item->title}}</a></h2>
 		                <label class="slabelextra">
-		                    <label class="slabeldate">{{$item['updated_at']}}</label>
-		                    <label class="slabelsource">{{$item['athor_name']}}</label>
+		                    <a class="slabelsource">{{$item->author_name}}</a>
+		                    <label class="slabeldate">{{substr($item->updated_at,0,10)}}</label>
 		                </label>
 		            </div>
 		        </div>

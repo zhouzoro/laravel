@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class='hidden'>
         <a href="">继续编辑</a><a href="">完成发布</a>
     </div>
 @endsection

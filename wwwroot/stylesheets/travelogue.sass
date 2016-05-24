@@ -1,5 +1,11 @@
 @charset "utf-8"
 
+$font-stack: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, “Microsoft YaHei”, “微软雅黑”, SimSun, “宋体”, Heiti, “黑体”, sans-serif
+$bg: #5EE4BE
+
+html,body,h1, h2, h3, h4, h5,a,button,label,.button,a,label,span
+	font-family: $font-stack
+
 .travelogue
 	img
 		width: 100%
@@ -7,3 +13,26 @@
 		max-height: 540px
 		margin: auto
 		object-fit: scale-down
+
+.post-hero
+	height: 432px
+	padding: 144px 24px 24px 8px
+	background-size: cover
+	#post-title
+		padding: 24px
+		span
+			padding: 2px
+			background: $bg
+			color: white
+	.user-link
+		padding: 0px 24px
+
+#post-body
+
+blockquote
+	margin: 16px
+	padding: 8px
+	border-left: 3px solid lightgray
+	font-style: italic
+	p
+		margin: 4px

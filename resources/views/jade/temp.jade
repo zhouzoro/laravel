@@ -1,9 +1,11 @@
-.user-button.ui.button
-	img(src='/images/user/007.jpg')
-.user-ops-popup.ui.flowing.popup.top.left.transition.hidden
-	.divider.border-top
-		a(href='') User007
-			.label	View Profile
-	.divider.border-top
-		a(href='') Settings
-		a(href='') Log out
+#new-campus
+	form
+		{{ csrf_field() }}
+		input.hidden(name='cover' type='text' value!='{{$post->as}}')
+		.cover
+			a.edit-cover
+				i.fa.fa-picture-o
+				i.fa.fa-plus-circle
+		.basic-info
+			.ui.input
+				input(name='cover' type='text')

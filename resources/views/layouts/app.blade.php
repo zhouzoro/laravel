@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>漫行邮轮</title>
+        @section('page-title')
+            <title>漫行邮轮</title>
+        @show
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--meta(name='renderer' content='webkit')-->
-        <meta(http-equiv="X-UA-Compatible" content="IE=10")>
+        <meta http-equiv="X-UA-Compatible" content="IE=10" >
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta property="qc:admins" content="1455576553251356375" />
         <link rel="stylesheet" href="/stylesheets/dist/bootstrap-grid.min.css">
